@@ -4,21 +4,14 @@
  */
 package batallanaval;
 
-import tablero.Tablero;
-
 /**
  *
- * @author Mariano
+ * @author maria
  */
-public class Jugador {
-    private String nick;
-    private Tablero tablero;
-        
+public class Main {
     
-    public void Atacar(){
+    public static void main(String[] args) {
         
     }
-    
-    
     
 }

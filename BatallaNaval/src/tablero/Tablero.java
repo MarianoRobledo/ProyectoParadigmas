@@ -4,109 +4,83 @@
  */
 package tablero;
 
-import batallanaval.piezas.*;
+import piezas.*;
 
 /**
  *
  * @author Mariano
  */
 public class Tablero {
-    private int[][] mapa;//por el momento lo dejamos como un int pero deberia de ser algo relacionados con las piezas por polimorfismo
+
+    private Casilla[][] mapa;//por el momento lo dejamos como un int pero deberia de ser algo relacionados con las piezas por polimorfismo
     private int cantidadNave;
     private Portaaviones[] portaviones;
     private Buque[] buques;
-    private Submarino[] submarino;
-    private Crucero[] crucero;
-    private Lancha[] lancha;
+    private Submarino[] submarinos;
+    private Crucero[] cruceros;
+    private Lancha[] lanchas;
     private int barcosHundidos; // es un contador
 
     public Tablero() {
     }
 
-    public Tablero(int[][] mapa, int cantidadNave, Portaaviones[] portaviones, Buque[] buques, Submarino[] submarino, Crucero[] crucero, Lancha[] lancha, int barcosHundidos) {
-        this.mapa = mapa;
-        this.cantidadNave = cantidadNave;
-        this.portaviones = portaviones;
-        this.buques = buques;
-        this.submarino = submarino;
-        this.crucero = crucero;
-        this.lancha = lancha;
-        this.barcosHundidos = barcosHundidos;
-    }
+    public Tablero(int tamaño, int portaavion, int buque, int submarino, int crucero, int lancha) {
+        this.mapa = new Casilla[tamaño][tamaño];
+        for (int i = 0; i < tamaño; i++) {
+            for (int j = 0; j < tamaño; j++) {
+                this.mapa[i][j] = new Casilla();
+            }
+        }
+        // this.cantidadNave = cantidadNave;
+        if (portaavion > 0) {
+            this.portaviones = new Portaaviones[portaavion];
+            for (int i = 0; i < portaavion; i++) {
+                this.portaviones[i] = new Portaaviones();
+            }
+        }
 
-    public int[][] getMapa() {
-        return mapa;
-    }
-
-    public void setMapa(int[][] mapa) {
-        this.mapa = mapa;
-    }
-
-    public int getCantidadNave() {
-        return cantidadNave;
-    }
-
-    public void setCantidadNave(int cantidadNave) {
-        this.cantidadNave = cantidadNave;
-    }
-
-    public Portaaviones[] getPortaviones() {
-        return portaviones;
-    }
-
-    public void setPortaviones(Portaaviones[] portaviones) {
-        this.portaviones = portaviones;
-    }
-
-    public Buque[] getBuques() {
-        return buques;
-    }
-
-    public void setBuques(Buque[] buques) {
-        this.buques = buques;
-    }
-
-    public Submarino[] getSubmarino() {
-        return submarino;
-    }
-
-    public void setSubmarino(Submarino[] submarino) {
-        this.submarino = submarino;
-    }
-
-    public Crucero[] getCrucero() {
-        return crucero;
-    }
-
-    public void setCrucero(Crucero[] crucero) {
-        this.crucero = crucero;
-    }
-
-    public Lancha[] getLancha() {
-        return lancha;
-    }
-
-    public void setLancha(Lancha[] lancha) {
-        this.lancha = lancha;
-    }
-
-    public int getBarcosHundidos() {
-        return barcosHundidos;
-    }
-
-    public void setBarcosHundidos(int barcosHundidos) {
-        this.barcosHundidos = barcosHundidos;
-    }
-    
-    public void colocarNave(){
+        if (buque > 0) {
+            this.buques = new Buque[buque];
+            for (int i = 0; i < buque; i++) {
+                this.buques[i] = new Buque();
+            }
+        }
         
-    }
-    
-    public void tiroEnemigo(){
+        if (submarino > 0) {
+            this.submarinos = new Submarino[submarino];
+            for (int i = 0; i < submarino; i++) {
+                this.submarinos[i] = new Submarino();
+            }
+        }
         
-    }
-    
-    public void marcarAtaque(){
+        if (crucero > 0) {
+            this.cruceros = new Crucero[crucero];
+            for (int i = 0; i < crucero; i++) {
+                this.cruceros[i] = new Crucero();
+            }
+        }
         
+        if (lancha > 0) {
+            this.lanchas = new Lancha[lancha];
+            for (int i = 0; i < lancha; i++) {
+                this.lanchas[i] = new Lancha();
+            }
+        }
+
+   //     this.barcosHundidos = barcosHundidos;
+    }
+
+    
+
+    public void colocarNave() {
+
+    }
+
+    public void tiroEnemigo() {
+
+    }
+
+    public void marcarAtaque() {
+
     }
 }
