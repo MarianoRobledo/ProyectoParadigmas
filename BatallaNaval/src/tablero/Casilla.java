@@ -23,4 +23,34 @@ public class Casilla {
         this.hit=false;
         this.barcoAlLado=false;
     }
+
+    public void setNave(Nave nave) {
+        this.nave = nave;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
+    
+    public boolean isAgua() {
+        return agua;
+    }
+
+    public boolean isIsla() {
+        return isla;
+    }
+
+    public boolean isHit() {
+        return hit;
+    }
+
+    public boolean isBarcoAlLado() {
+        return barcoAlLado;
+    }
+
+    public Nave getNave() {
+        return nave;
+    }
+    
+    
 }
