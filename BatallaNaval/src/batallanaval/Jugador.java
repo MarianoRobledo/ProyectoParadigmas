@@ -47,7 +47,6 @@ public class Jugador {
                         System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
                         flag = false;
                     }
-                    
 
                 }
             }
@@ -58,17 +57,17 @@ public class Jugador {
 
     }
 
-    private boolean esValido(String i, int j, String[] filas) {
-        return this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j].isAgua();
+    private boolean esValido(String i, int j, String[] filas) {// valida si la casilla es en donde se coloca esta libre
+        return (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j].isAgua() && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j].isBarcoAlLado() == false);
     }
 
-    private boolean esValidoDerecha(String i, int j, int size, int tamanio, String[] filas) {
+    private boolean esValidoDerecha(String i, int j, int size, int tamanio, String[] filas) {//valida si todo el intervalo es apto
         boolean flag = true;
         if ((j + size) > tamanio - 1) {// si esta fuera de rango no se puede colocar esa pieza
             flag = false;
         } else {//comprueba si toda la trayectoria esta libre
             for (int k = 0; k < size; k++) {
-                if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j + k].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j + k].isIsla() == true)) {
+                if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j + k].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j + k].isIsla() == true) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i)][j + k].isBarcoAlLado() == true)) {
                     flag = false;
                 }
             }
@@ -76,13 +75,13 @@ public class Jugador {
         return flag;
     }
 
-    private boolean esValidoAbajo(String i, int j, int size, int tamanio, String[] filas) {
+    private boolean esValidoAbajo(String i, int j, int size, int tamanio, String[] filas) {//valida si todo el intervalo es apto
         boolean flag = true;
         if ((Arrays.asList(filas).indexOf(i) + size) > tamanio - 1) {// si esta fuera de rango no se puede colocar esa pieza
             flag = false;
         } else {//comprueba si toda la trayectoria esta libre
             for (int k = 0; k < size; k++) {
-                if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i) + k][j].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i) + k][j].isIsla() == true)) {
+                if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i) + k][j].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i) + k][j].isIsla() == true) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i) + k][j].isBarcoAlLado() == false)) {
                     flag = false;
                 }
             }
@@ -90,7 +89,7 @@ public class Jugador {
         return flag;
     }
 
-    private String[] filas(int size) {
+    private String[] filas(int size) {//devuelve el array de filas 
         String[] fila;
         switch (size) {
             case 5: {
@@ -110,7 +109,7 @@ public class Jugador {
         return fila;
     }
 
-    private String darFila(String[] filas, int size) {
+    private String darFila(String[] filas, int size) {// devuelve el  valor de la fila
         String res = "";
         boolean flag = true;
         while (flag) {
@@ -130,7 +129,7 @@ public class Jugador {
         return res;
     }
 
-    private int darColumna(int size) {
+    private int darColumna(int size) {//devuelve el valor de la columna
         int columna = 0;
         boolean flag = true;
 
@@ -152,7 +151,7 @@ public class Jugador {
         return columna - 1;
     }
 
-    private boolean movimiento(String fila, int columna, Nave nave, String[] filas) {
+    private boolean movimiento(String fila, int columna, Nave nave, String[] filas) {//logica para colocar naves 
         boolean flag = true;
         boolean respuesta = false;
         int res;
@@ -230,24 +229,58 @@ public class Jugador {
         for (int i = 0; i < nave.getVida(); i++) {
             tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i].setNave(nave);
             tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i].setAgua(false);
-            if (i < nave.getVida() - 1 && i == 0) {
+            if (nave.getVida() == 1) {
                 if (Arrays.asList(filas).indexOf(fila) >= 1) {//Primer posicion
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                }
+
+                if (Arrays.asList(filas).indexOf(fila) < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                }
+                if (columna >= 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i - 1].setBarcoAlLado(true);//elemento en diagonal superior de la pos inicial
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i - 1].setBarcoAlLado(true);//elemento atras de la pos inicial
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i - 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
+                }
+                if (columna < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i + 1].setBarcoAlLado(true);//elemento atras de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i + 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
                 }
-            } else if (i < nave.getVida() - 1) {//posiciones del medio
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
 
+            } else if (i < nave.getVida() - 1 && i == 0) {
+                if (Arrays.asList(filas).indexOf(fila) >= 1) {//Primer posicion
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                }
+
+                if (Arrays.asList(filas).indexOf(fila) < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                }
+                if (columna >= 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i - 1].setBarcoAlLado(true);//elemento en diagonal superior de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i - 1].setBarcoAlLado(true);//elemento atras de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i - 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
+                }
+
+            } else if (i < nave.getVida() - 1) {//posiciones del medio
+                if (Arrays.asList(filas).indexOf(fila) >= 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                }
+                if (Arrays.asList(filas).indexOf(fila) < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                }
             } else {//ultima posicion
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i + 1].setBarcoAlLado(true);//elemento en diagonal superior de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i + 1].setBarcoAlLado(true);//elemento atras de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i + 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                if (Arrays.asList(filas).indexOf(fila) >= 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                }
+                if (Arrays.asList(filas).indexOf(fila) < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i + 1].setBarcoAlLado(true);//elemento en diagonal superior de la pos inicial
+                }
+                if (columna < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i + 1].setBarcoAlLado(true);//elemento atras de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i + 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                }
             }
         }
 
@@ -259,22 +292,37 @@ public class Jugador {
             tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna].setAgua(false);
             if (i < nave.getVida() - 1 && i == 0) {
                 if (Arrays.asList(filas).indexOf(fila) >= 1) {//Primer posicion
-                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
-                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal superior izq de la pos inicial
-                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna].setBarcoAlLado(true);//elemento arriba de la pos inicial
-                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna + 1].setBarcoAlLado(true);//diagonal superior der de la pos inicial
-                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+                    if (columna >= 1) {
+                        tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
+                    }
+                    if (columna < filas.length - 1) {
+                        tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+                    }
+                    if (Arrays.asList(filas).indexOf(fila) > 0) {
+                        tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal superior izq de la pos inicial
+                        tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna].setBarcoAlLado(true);//elemento arriba de la pos inicial
+                        tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna + 1].setBarcoAlLado(true);//diagonal superior der de la pos inicial
+                    }
                 }
             } else if (i < nave.getVida() - 1) {//posiciones del medio
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
-
+                if (columna >= 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
+                }
+                if (columna < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+                }
             } else {//ultima posicion
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna].setBarcoAlLado(true);//elemento arriba de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna + 1].setBarcoAlLado(true);//diagonal inferior der de la pos inicial
-                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+                if (columna >= 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
+                }
+                if (columna < filas.length - 1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+                }
+                if (Arrays.asList(filas).indexOf(fila) < filas.length-1) {
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna + 1].setBarcoAlLado(true);//diagonal inferior der de la pos inicial
+                }
             }
         }
     }

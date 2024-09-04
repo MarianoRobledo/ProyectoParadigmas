@@ -81,7 +81,7 @@ public class Tablero {
                     System.out.print("[ ]");
                 }else if(this.mapa[i][j].isIsla()){ //Si isla es True
                     System.out.print("[I]");
-                }else if(this.mapa[i][j].isBarcoAlLado()){ //Si esta al aldo de una nave
+                }else if(this.mapa[i][j].isBarcoAlLado()){ //Si esta al lado de una nave
                     System.out.print("[-]");
                 }else{//Si hay una nave
                     System.out.print("[N]");
