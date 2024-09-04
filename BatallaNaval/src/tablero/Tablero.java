@@ -74,14 +74,16 @@ public class Tablero {
         return mapa;
     }
 
-    public void verTableroDePiezas(int tamanio) { 
+    public void verTableroDePiezas(int tamanio) { //en ves de pasar el tamaño usar el getmapa.length
         for (int i = 0; i < tamanio; i++) {
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isAgua()){ //Si agua es True
                     System.out.print("[ ]");
                 }else if(this.mapa[i][j].isIsla()){ //Si isla es True
                     System.out.print("[I]");
-                }else{ //Si hay una nave
+                }else if(this.mapa[i][j].isBarcoAlLado()){ //Si esta al aldo de una nave
+                    System.out.print("[-]");
+                }else{//Si hay una nave
                     System.out.print("[N]");
                 }
             }
@@ -130,5 +132,28 @@ public class Tablero {
             System.out.println("Lanchas: "+ this.lanchas.length);
         }  
     }
+
+    public Portaaviones[] getPortaviones() {
+        return portaviones;
+    }
+
+    public Buque[] getBuques() {
+        return buques;
+    }
+
+    public Submarino[] getSubmarinos() {
+        return submarinos;
+    }
+
+    public Crucero[] getCruceros() {
+        return cruceros;
+    }
+
+    public Lancha[] getLanchas() {
+        return lanchas;
+    }
+    
+    
+    
 
 }
