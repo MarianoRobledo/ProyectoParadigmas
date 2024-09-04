@@ -43,33 +43,11 @@ public class Jugador {
                     fila = darFila(filas, tamanio);
                     columna = darColumna(tamanio);
 
-                    try {
-                        if (esValido(fila, columna, filas)) {
-                            if (esValidoDerecha(fila, columna, portaviones[i].getMAX_VIDA(), tamanio, filas) && esValidoAbajo(fila, columna, portaviones[i].getMAX_VIDA(), tamanio, filas)) {
-
-                                if (movimiento()) {
-                                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
-                                }
-                            }
-                        } else {
-                            if (esValidoDerecha(fila, columna, portaviones[i].getMAX_VIDA(), tamanio, filas)) {
-                                System.out.println("Seleccione una opcion\n"
-                                        + "1: Colocar a la derecha\n"
-                                        + "2: Cambiar de fila y columna");
-                            } else {
-                                if (esValidoAbajo(fila, columna, portaviones[i].getMAX_VIDA(), tamanio, filas)) {
-                                    System.out.println("Seleccione una opcion\n"
-                                            + "1: Colocar para abajo\n"
-                                            + "2: Cambiar de fila y columna");
-                                } else {
-                                    System.out.println("La fila y columna seleccionada no es valida, ver el mapa y volver a intentar");
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                        System.out.println("Dar un numero correcto");
+                    if (movimiento(fila, columna, portaviones[i], filas)) {
+                        System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                        flag = false;
                     }
+                    
 
                 }
             }
@@ -174,45 +152,130 @@ public class Jugador {
         return columna - 1;
     }
 
-    private boolean movimiento() {
+    private boolean movimiento(String fila, int columna, Nave nave, String[] filas) {
         boolean flag = true;
         boolean respuesta = false;
         int res;
 
         while (flag) {
             try {
-                System.out.println("Seleccione una opcion\n"
-                        + "1: Colocar a la derecha\n"
-                        + "2: Colocar para abajo\n"
-                        + "3: Cambiar de fila y columna");
-                res = r.nextInt();
-                r.nextInt();
-                if (res == 1) {
-                    movimientoDerecha();
-                    respuesta = true;
-                    flag = false;
-                } else if (res == 2) {
-                    movimientoAbajo();
-                    respuesta = true;
-                    flag = false;
-                } else if (res == 3) {
-                    flag = false;
-                } else {
-                    System.out.println("Dar un numero valido");
+                if (esValido(fila, columna, filas)) {
+                    if (esValidoDerecha(fila, columna, nave.getVida(), filas.length, filas) && esValidoAbajo(fila, columna, nave.getVida(), filas.length, filas)) {
+                        System.out.println("Seleccione una opcion\n"
+                                + "1: Colocar a la derecha\n"
+                                + "2: Colocar para abajo\n"
+                                + "3: Cambiar de fila y columna");
+                        res = r.nextInt();
+                        r.nextInt();
+                        if (res == 1) {
+                            movimientoDerecha(fila, columna, nave, filas);
+                            respuesta = true;
+                            flag = false;
+                        } else if (res == 2) {
+                            movimientoAbajo(fila, columna, nave, filas);
+                            respuesta = true;
+                            flag = false;
+                        } else if (res == 3) {
+                            flag = false;
+                        } else {
+                            System.out.println("Dar un numero valido");
+                            System.out.println("");
+                        }
+                    } else if (esValidoDerecha(fila, columna, nave.getVida(), filas.length, filas)) {
+                        System.out.println("Seleccione una opcion\n"
+                                + "1: Colocar a la derecha\n"
+                                + "2: Cambiar de fila y columna");
+                        res = r.nextInt();
+                        r.nextInt();
+                        if (res == 1) {
+                            movimientoDerecha(fila, columna, nave, filas);
+                            respuesta = true;
+                            flag = false;
+                        } else if (res == 2) {
+                            flag = false;
+                        } else {
+                            System.out.println("Dar un numero valido");
+                            System.out.println("");
+                        }
+                    } else {
+                        System.out.println("Seleccione una opcion\n"
+                                + "1: Colocar para abajo\n"
+                                + "2: Cambiar de fila y columna");
+                        res = r.nextInt();
+                        r.nextInt();
+                        if (res == 1) {
+                            movimientoAbajo(fila, columna, nave, filas);
+                            respuesta = true;
+                            flag = false;
+                        } else if (res == 2) {
+                            flag = false;
+                        } else {
+                            System.out.println("Dar un numero valido");
+                            System.out.println("");
+                        }
+                    }
                 }
 
             } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Dar un numero valido");
+                System.out.println("");
             }
 
         }
         return respuesta;
     }
 
-    private void movimientoDerecha() {
+    private void movimientoDerecha(String fila, int columna, Nave nave, String[] filas) {
+        for (int i = 0; i < nave.getVida(); i++) {
+            tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i].setNave(nave);
+            tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i].setAgua(false);
+            if (i < nave.getVida() - 1 && i == 0) {
+                if (Arrays.asList(filas).indexOf(fila) >= 1) {//Primer posicion
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i - 1].setBarcoAlLado(true);//elemento en diagonal superior de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i - 1].setBarcoAlLado(true);//elemento atras de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i - 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+                }
+            } else if (i < nave.getVida() - 1) {//posiciones del medio
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+
+            } else {//ultima posicion
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i].setBarcoAlLado(true);//elemento de arriba de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) - 1][columna + i + 1].setBarcoAlLado(true);//elemento en diagonal superior de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila)][columna + i + 1].setBarcoAlLado(true);//elemento atras de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i + 1].setBarcoAlLado(true);//diagonal inferior de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + 1][columna + i].setBarcoAlLado(true);//elemento abajo de la pos inicial
+            }
+        }
 
     }
 
-    private void movimientoAbajo() {
+    private void movimientoAbajo(String fila, int columna, Nave nave, String[] filas) {
+        for (int i = 0; i < nave.getVida(); i++) {
+            tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna].setNave(nave);
+            tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna].setAgua(false);
+            if (i < nave.getVida() - 1 && i == 0) {
+                if (Arrays.asList(filas).indexOf(fila) >= 1) {//Primer posicion
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal superior izq de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna].setBarcoAlLado(true);//elemento arriba de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i - 1][columna + 1].setBarcoAlLado(true);//diagonal superior der de la pos inicial
+                    tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+                }
+            } else if (i < nave.getVida() - 1) {//posiciones del medio
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
 
+            } else {//ultima posicion
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna - 1].setBarcoAlLado(true);//elemento a la izq de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna].setBarcoAlLado(true);//elemento arriba de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna + 1].setBarcoAlLado(true);//diagonal inferior der de la pos inicial
+                tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
+            }
+        }
     }
 }

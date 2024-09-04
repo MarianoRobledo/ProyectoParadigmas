@@ -31,6 +31,20 @@ public class Casilla {
     public void setHit(boolean hit) {
         this.hit = hit;
     }
+
+    public void setAgua(boolean agua) {
+        this.agua = agua;
+    }
+
+    public void setIsla(boolean isla) {
+        this.isla = isla;
+    }
+
+    public void setBarcoAlLado(boolean barcoAlLado) {
+        this.barcoAlLado = barcoAlLado;
+    }
+    
+    
     
     public boolean isAgua() {
         return agua;
