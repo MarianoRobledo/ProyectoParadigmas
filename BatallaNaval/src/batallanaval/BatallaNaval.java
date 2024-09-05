@@ -46,6 +46,8 @@ public class BatallaNaval {
 
         while (flag) {
             try {
+                System.out.println(mostrarParametros());
+                System.out.println("");
                 System.out.println("Que quieres modificar\n"
                         + "1: Tamaño del mapa\n"
                         + "2: Disposicion de barcos,\n"
@@ -56,25 +58,26 @@ public class BatallaNaval {
 
                 switch (res) {
                     case 1:
-                        this.tamaño = settTamaño();
+                        settTamaño();
                         break;
                     case 2:
                         settNaves();
                         break;
                     case 3:
-                        flag=false;
-                        
+                        flag=false;  
+                        break;
+                    default:
+                        System.out.println("Dar un numero correcto");
+                        System.out.println("");
+                        break;
                 }
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                System.out.println("Dar un número valido");
+                System.out.println("Dar un numero valido");
                 System.out.println("");
-            } finally {
-                System.out.println("Fin de menu de parametros");
-                System.out.println("");
+                r.nextLine();
             }
-
         }
 
     }
@@ -102,9 +105,9 @@ public class BatallaNaval {
         return casillas;
     }
      */
-    private int settTamaño() {
+    private void settTamaño() {
         boolean flag = true;
-        int tamaño = 0;
+        
         String res;
         while (flag) {
             try {
@@ -112,19 +115,23 @@ public class BatallaNaval {
                 res = r.nextLine();
                 switch (res.toLowerCase()) {
                     case "a":
-                        tamaño = 5;
+                        this.tamaño = 5;
+                        settNaves();
                         flag = false;
                         break;
                     case "b":
-                        tamaño = 10;
+                        this.tamaño = 10;
+                        settNaves();
                         flag = false;
                         break;
                     case "c":
-                        tamaño = 15;
+                        this.tamaño = 15;
+                        settNaves();
                         flag = false;
                         break;
                     default:
                         System.out.println("Intentar con una letra correcta");
+                        System.out.println("");
                         break;
                 }
             } catch (Exception e) {
@@ -133,7 +140,7 @@ public class BatallaNaval {
                 System.out.println("");
             }
         }
-        return tamaño;
+        
     }
 
     private void settNaves() {
@@ -174,6 +181,7 @@ public class BatallaNaval {
                             break;
                         default:
                             System.out.println("Dar una letra correcta");
+                            System.out.println("");
                     }
                 } else if(this.tamaño==10){
                     System.out.println("Elegir combinacion de barcos:\n"
@@ -208,6 +216,7 @@ public class BatallaNaval {
                             break;
                         default:
                             System.out.println("Dar una letra correcta");
+                            System.out.println("");
                     }
                     
                 }else{
