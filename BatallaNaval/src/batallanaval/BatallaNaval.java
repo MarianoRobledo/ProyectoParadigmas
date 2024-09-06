@@ -46,8 +46,6 @@ public class BatallaNaval {
 
         while (flag) {
             try {
-                System.out.println(mostrarParametros());
-                System.out.println("");
                 System.out.println("Que quieres modificar\n"
                         + "1: Tamaño del mapa\n"
                         + "2: Disposicion de barcos,\n"
@@ -82,29 +80,7 @@ public class BatallaNaval {
 
     }
 
-    /* //decidir despues
-    private int settCasillas() {
-        boolean flag = true;
-        int casillas = 0;
-        while (flag) {
-            try {
-                System.out.println("Dar un valor entre 15 y 20 ");
-                casillas = r.nextInt();
-                r.nextLine();
-                if (casillas >= 15 && casillas <= 20) {
-                    flag = false;
-                } else {
-                    System.out.println("Intentar con un numero correcto");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println("Dar un número valido");
-                System.out.println("");
-            }
-        }
-        return casillas;
-    }
-     */
+ 
     private void settTamaño() {
         boolean flag = true;
         
@@ -273,11 +249,86 @@ public class BatallaNaval {
                 + "Cantidad de Lanchas: "+this.lanchas;
     }
     
-    public void settJugador1(Jugador jugador){
-        this.jugador1=jugador;
+
+    public Scanner getR() {
+        return r;
+    }
+
+    public void setR(Scanner r) {
+        this.r = r;
+    }
+
+    public Jugador getJugador1() {
+        return jugador1;
+    }
+
+    public void setJugador1(Jugador jugador1) {
+        this.jugador1 = jugador1;
+    }
+
+    public Jugador getJugador2() {
+        return jugador2;
+    }
+
+    public void setJugador2(Jugador jugador2) {
+        this.jugador2 = jugador2;
+    }
+
+    public int getCasillas() {
+        return casillas;
+    }
+
+    public void setCasillas(int casillas) {
+        this.casillas = casillas;
+    }
+
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
+
+    public int getPortaaviones() {
+        return portaaviones;
+    }
+
+    public void setPortaaviones(int portaaviones) {
+        this.portaaviones = portaaviones;
+    }
+
+    public int getBuques() {
+        return buques;
+    }
+
+    public void setBuques(int buques) {
+        this.buques = buques;
+    }
+
+    public int getSubmarinos() {
+        return submarinos;
+    }
+
+    public void setSubmarinos(int submarinos) {
+        this.submarinos = submarinos;
+    }
+
+    public int getCruceros() {
+        return cruceros;
+    }
+
+    public void setCruceros(int cruceros) {
+        this.cruceros = cruceros;
+    }
+
+    public int getLanchas() {
+        return lanchas;
+    }
+
+    public void setLanchas(int lanchas) {
+        this.lanchas = lanchas;
     }
     
-    public void settJugador2(Jugador jugador){
-        this.jugador2=jugador;
-    }
+    
 }

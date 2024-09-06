@@ -1,5 +1,6 @@
 
 import batallanaval.BatallaNaval;
+import tablero.Tablero;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,11 +15,15 @@ public class PruebaMain {
     
     public static void main(String[] args) {
         
-        BatallaNaval b1 = new BatallaNaval();
-        System.out.println(b1.mostrarParametros());
-        System.out.println("");
-        b1.settearParametros();
         
+        Tablero t= new Tablero(15,1,2,0,1,0);
+        t.verTableroDePiezas();
+        System.out.println("");
+        t.insertarIslas();
+        System.out.println("");
+        t.verTableroDePiezas();
+        t.barcosASalvo();
+        t.barcosHundidos();
         
     }
 }

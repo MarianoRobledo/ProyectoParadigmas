@@ -4,8 +4,7 @@
  */
 package batallanaval;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import piezas.Nave;
 import piezas.Portaaviones;
 import tablero.Tablero;
@@ -21,11 +20,20 @@ public class Jugador {
     private String nick;
     private Tablero tablero;
 
-    public void Atacar() {
+    public Jugador(String nick, Tablero tablero) {
+        this.nick = nick;
+        this.tablero = tablero;
+    }
 
+    
+    
+    
+    public void atacar() {
+        
     }
 
     public void colocarNave() {
+        Iterator<Nave> it = tablero.getNaves().iterator();
         boolean flag = true;
         int columna, tamanio, res;
         String fila;
@@ -33,24 +41,66 @@ public class Jugador {
 
         String[] filas = filas(tamanio);
 
-        if (tablero.getPortaviones().length > 0) {
-            Portaaviones[] portaviones = tablero.getPortaviones();
-            for (int i = 0; i < portaviones.length; i++) {
-                while (flag) {
-                    tablero.verTableroDePiezas(tamanio);
-                    System.out.println("");
+        while (it.hasNext()) {
+            //tablero.verTableroDePiezas(tamanio);
+            //System.out.println("");
+            if (it.next().getClass().getSimpleName().equals("Portaaviones")) {
+                System.out.println("Se procede a colocar una pieza de tipo portaavion");
+                fila = darFila(filas, tamanio);
+                columna = darColumna(tamanio);
 
-                    fila = darFila(filas, tamanio);
-                    columna = darColumna(tamanio);
-
-                    if (movimiento(fila, columna, portaviones[i], filas)) {
-                        System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
-                        flag = false;
-                    }
-
+                if (movimiento(fila, columna, it.next(), filas)) {
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                    flag = false;
                 }
             }
+            
+            if (it.next().getClass().getSimpleName().equals("Buque")) {
+                System.out.println("Se procede a colocar una pieza de tipo buque");
+                fila = darFila(filas, tamanio);
+                columna = darColumna(tamanio);
+
+                if (movimiento(fila, columna, it.next(), filas)) {
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                    flag = false;
+                }
+            }
+            
+            if (it.next().getClass().getSimpleName().equals("Submarino")) {
+                System.out.println("Se procede a colocar una pieza de tipo submarino");
+                fila = darFila(filas, tamanio);
+                columna = darColumna(tamanio);
+
+                if (movimiento(fila, columna, it.next(), filas)) {
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                    flag = false;
+                }
+            }
+            
+            if (it.next().getClass().getSimpleName().equals("Crucero")) {
+                System.out.println("Se procede a colocar una pieza de tipo crucero");
+                fila = darFila(filas, tamanio);
+                columna = darColumna(tamanio);
+
+                if (movimiento(fila, columna, it.next(), filas)) {
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                    flag = false;
+                }
+            }
+            
+            if (it.next().getClass().getSimpleName().equals("Lancha")) {
+                System.out.println("Se procede a colocar una pieza de tipo lancha");
+                fila = darFila(filas, tamanio);
+                columna = darColumna(tamanio);
+
+                if (movimiento(fila, columna, it.next(), filas)) {
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                    flag = false;
+                }
+            }
+
         }
+
     }
 
     private void ponerNaves(Nave nave, int size) {
@@ -318,7 +368,7 @@ public class Jugador {
                 if (columna < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
                 }
-                if (Arrays.asList(filas).indexOf(fila) < filas.length-1) {
+                if (Arrays.asList(filas).indexOf(fila) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna].setBarcoAlLado(true);//elemento abajo de la pos inicial
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila) + i + 1][columna + 1].setBarcoAlLado(true);//diagonal inferior der de la pos inicial
