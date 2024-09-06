@@ -62,7 +62,7 @@ public class Jugador {
     }
 
     private boolean esValido(String i, int j, String[] filas) {// valida si la casilla es en donde se coloca esta libr
-        return (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isAgua() && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isBarcoAlLado() == false);
+        return (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isAgua() && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isBarcoAlLado() == false && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isIsla() == false);
     }
 
     private boolean esValidoDerecha(String i, int j, int size, int tamanio, String[] filas) {//valida si todo el intervalo es apto

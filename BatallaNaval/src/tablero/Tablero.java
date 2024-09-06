@@ -29,6 +29,7 @@ public class Tablero {
                 this.mapa[i][j] = new Casilla();
             }
         }
+        insertarIslas();
         
         if (portaavion > 0) {
             for (int i = 0; i < portaavion; i++) {
@@ -103,24 +104,189 @@ public class Tablero {
         tableroEnemigo.getMapa()[i][j].setHit(true); //Ingreso a la casilla elegida en el tablero enemigo y marco hit = true
         tableroEnemigo.getMapa()[i][j].getNave().RecibirDaño(); //Ingreso a la referencia de la nave de esa casilla y utilizo RecibirDaño()
     }
+    
+    public void insertarIslas(){
+        int cantIslas;
+        Random random = new Random();
+        if(this.mapa.length==5){
+            cantIslas=1;
+        }else if(this.mapa.length==10){
+            cantIslas=2; 
+        }else{
+            cantIslas=3;
+        }
+        for(int i=0;i<cantIslas;i++){
+            boolean flag=false;
+            while (flag==false){
+                int x = random.nextInt(this.mapa.length);
+                int y = random.nextInt(this.mapa.length);
+                if(espacioDisponible(x,y)){
+                    flag=true;
+                    if(x==this.mapa.length-1){
+                        if(y==this.mapa.length-1){
+                            this.mapa[x][y].setIsla(true);
+                            this.mapa[x-1][y].setIsla(true);
+                            this.mapa[x][y-1].setIsla(true);
+                            this.mapa[x-1][y-1].setIsla(true);
+                        }else{
+                            this.mapa[x][y].setIsla(true);
+                            this.mapa[x-1][y].setIsla(true);
+                            this.mapa[x][y+1].setIsla(true);
+                            this.mapa[x-1][y+1].setIsla(true);
+                        }
+                    }else{
+                        if(y==this.mapa.length-1){
+                            this.mapa[x][y].setIsla(true);
+                            this.mapa[x+1][y].setIsla(true);
+                            this.mapa[x][y-1].setIsla(true);
+                            this.mapa[x+1][y-1].setIsla(true);
+                        }else{
+                            this.mapa[x][y].setIsla(true);
+                            this.mapa[x+1][y].setIsla(true);
+                            this.mapa[x][y+1].setIsla(true);
+                            this.mapa[x+1][y+1].setIsla(true);
+                        }
+                    }
+                } 
+            }
+        }
+    }
+    
+    public boolean espacioDisponible(int x, int y){
+        if(x==this.mapa.length-1){
+            if(y==this.mapa.length-1){
+                if (this.mapa[x][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x-1][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x][y-1].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x-1][y-1].isIsla()==true){
+                    return false;
+                }
+            }else{
+                if (this.mapa[x][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x-1][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x][y+1].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x-1][y+1].isIsla()==true){
+                    return false;
+                }
+            }
+        }else{
+            if(y==this.mapa.length-1){
+                if (this.mapa[x][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x+1][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x][y-1].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x+1][y-1].isIsla()==true){
+                    return false;
+                }
+            }else{
+                if (this.mapa[x][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x+1][y].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x][y+1].isIsla()==true){
+                    return false;
+                }else if(this.mapa[x+1][y+1].isIsla()==true){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public void barcosASalvo(){
+        Iterator<Nave> it = this.naves.iterator();
+        int portaaviones=0;
+        int buque=0;
+        int submarino=0;
+        int crucero=0;
+        int lancha=0;
+        
+        
+           while(it.hasNext()){
+               Nave nave=it.next();
+               if (nave.getClass().getSimpleName().equals("Portaaviones") && nave.getVida()>0){
+                   portaaviones++;
+               }else if(nave.getClass().getSimpleName().equals("Buque") && nave.getVida()>0){
+                   buque++;
+               }else if(nave.getClass().getSimpleName().equals("Submarino") && nave.getVida()>0){
+                   submarino++;
+               }else if(nave.getClass().getSimpleName().equals("Crucero") && nave.getVida()>0){
+                   crucero++;
+               }else if(nave.getClass().getSimpleName().equals("Lancha") && nave.getVida()>0){
+                   lancha++;
+               }
+               
+           }
+           if (portaaviones>0){
+              System.out.println("Tienes "+ portaaviones + " portaaviones");
+           }
+           if (buque>0){
+              System.out.println("Tienes "+ buque + " buques");
+           }
+           if (submarino>0){
+              System.out.println("Tienes "+ submarino + " submarinos");
+           }
+           if (crucero>0){
+              System.out.println("Tienes "+ crucero + " cruceros");
+           }
+           if (lancha>0){
+              System.out.println("Tienes "+ lancha + " lanchas");
+           }
+    }
+    
+    public void barcosHundidos(){
+        Iterator<Nave> it = this.naves.iterator();
+        int portaaviones=0;
+        int buque=0;
+        int submarino=0;
+        int crucero=0;
+        int lancha=0;
+        
+        
+           while(it.hasNext()){
+               Nave nave=it.next();
+               if (nave.getClass().getSimpleName().equals("Portaaviones") && nave.getVida()==0){
+                   portaaviones++;
+               }else if(nave.getClass().getSimpleName().equals("Buque") && nave.getVida()==0){
+                   buque++;
+               }else if(nave.getClass().getSimpleName().equals("Submarino") && nave.getVida()==0){
+                   submarino++;
+               }else if(nave.getClass().getSimpleName().equals("Crucero") && nave.getVida()==0){
+                   crucero++;
+               }else if(nave.getClass().getSimpleName().equals("Lancha") && nave.getVida()==0){
+                   lancha++;
+               }
+               
+           }
+           if (portaaviones>0){
+              System.out.println("Tienes "+ portaaviones + " portaaviones");
+           }
+           if (buque>0){
+              System.out.println("Tienes "+ buque + " buques");
+           }
+           if (submarino>0){
+              System.out.println("Tienes "+ submarino + " submarinos");
+           }
+           if (crucero>0){
+              System.out.println("Tienes "+ crucero + " cruceros");
+           }
+           if (lancha>0){
+              System.out.println("Tienes "+ lancha + " lanchas");
+           }
+           if (portaaviones==0 && buque==0 && submarino==0 && crucero==0 && lancha==0){
+               System.out.println("No tiene barcos hundidos");
+           }
+    }
 
-//    public void barcosASalvo(){ //Muestra en pantalla la cantidad de barcos de cada tipo aun a salvo
-//        if (this.portaviones.length>0){
-//            System.out.println("Portaviones: "+ this.portaviones.length);
-//        }
-//        if (this.buques.length>0){
-//            System.out.println("Buques: "+ this.buques.length);
-//        }
-//        if (this.submarinos.length>0){
-//            System.out.println("Submarinos: "+ this.submarinos.length);
-//        }
-//        if (this.cruceros.length>0){
-//            System.out.println("Cruceros: "+ this.cruceros.length);
-//        }
-//        if (this.lanchas.length>0){
-//            System.out.println("Lanchas: "+ this.lanchas.length);
-//        }  
-//    }
+
     public List<Nave> getNaves() {
         return naves;
     }
