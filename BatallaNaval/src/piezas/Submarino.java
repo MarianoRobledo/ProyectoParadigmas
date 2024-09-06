@@ -14,5 +14,12 @@ public class Submarino extends Nave{
     public Submarino() {
         super(MAX_VIDA);
     }
+
+    @Override
+    public String toString() {
+        return "Submarino{" + '}';
+    }
+    
+    
     
 }

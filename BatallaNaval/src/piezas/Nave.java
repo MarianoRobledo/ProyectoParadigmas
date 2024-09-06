@@ -24,4 +24,10 @@ public abstract class Nave {
     public void RecibirDaño(){
         this.vida-=1;
     }
+
+    public int getVida() {
+        return vida;
+    }
+    
+    
 }

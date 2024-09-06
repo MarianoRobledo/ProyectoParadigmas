@@ -14,5 +14,12 @@ public class Crucero extends Nave{
     public Crucero() {
         super(MAX_VIDA);
     }
+
+    @Override
+    public String toString() {
+        return "Crucero{" + '}';
+    }
+    
+    
     
 }

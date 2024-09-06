@@ -56,55 +56,34 @@ public class BatallaNaval {
 
                 switch (res) {
                     case 1:
-                        this.tamaño = settTamaño();
+                        settTamaño();
                         break;
                     case 2:
                         settNaves();
                         break;
                     case 3:
-                        flag=false;
-                        
+                        flag=false;  
+                        break;
+                    default:
+                        System.out.println("Dar un numero correcto");
+                        System.out.println("");
+                        break;
                 }
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                System.out.println("Dar un número valido");
+                System.out.println("Dar un numero valido");
                 System.out.println("");
-            } finally {
-                System.out.println("Fin de menu de parametros");
-                System.out.println("");
-            }
-
-        }
-
-    }
-
-    /* //decidir despues
-    private int settCasillas() {
-        boolean flag = true;
-        int casillas = 0;
-        while (flag) {
-            try {
-                System.out.println("Dar un valor entre 15 y 20 ");
-                casillas = r.nextInt();
                 r.nextLine();
-                if (casillas >= 15 && casillas <= 20) {
-                    flag = false;
-                } else {
-                    System.out.println("Intentar con un numero correcto");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println("Dar un número valido");
-                System.out.println("");
             }
         }
-        return casillas;
+
     }
-     */
-    private int settTamaño() {
+
+ 
+    private void settTamaño() {
         boolean flag = true;
-        int tamaño = 0;
+        
         String res;
         while (flag) {
             try {
@@ -112,19 +91,23 @@ public class BatallaNaval {
                 res = r.nextLine();
                 switch (res.toLowerCase()) {
                     case "a":
-                        tamaño = 5;
+                        this.tamaño = 5;
+                        settNaves();
                         flag = false;
                         break;
                     case "b":
-                        tamaño = 10;
+                        this.tamaño = 10;
+                        settNaves();
                         flag = false;
                         break;
                     case "c":
-                        tamaño = 15;
+                        this.tamaño = 15;
+                        settNaves();
                         flag = false;
                         break;
                     default:
                         System.out.println("Intentar con una letra correcta");
+                        System.out.println("");
                         break;
                 }
             } catch (Exception e) {
@@ -133,7 +116,7 @@ public class BatallaNaval {
                 System.out.println("");
             }
         }
-        return tamaño;
+        
     }
 
     private void settNaves() {
@@ -174,6 +157,7 @@ public class BatallaNaval {
                             break;
                         default:
                             System.out.println("Dar una letra correcta");
+                            System.out.println("");
                     }
                 } else if(this.tamaño==10){
                     System.out.println("Elegir combinacion de barcos:\n"
@@ -208,6 +192,7 @@ public class BatallaNaval {
                             break;
                         default:
                             System.out.println("Dar una letra correcta");
+                            System.out.println("");
                     }
                     
                 }else{
@@ -264,11 +249,86 @@ public class BatallaNaval {
                 + "Cantidad de Lanchas: "+this.lanchas;
     }
     
-    public void settJugador1(Jugador jugador){
-        this.jugador1=jugador;
+
+    public Scanner getR() {
+        return r;
+    }
+
+    public void setR(Scanner r) {
+        this.r = r;
+    }
+
+    public Jugador getJugador1() {
+        return jugador1;
+    }
+
+    public void setJugador1(Jugador jugador1) {
+        this.jugador1 = jugador1;
+    }
+
+    public Jugador getJugador2() {
+        return jugador2;
+    }
+
+    public void setJugador2(Jugador jugador2) {
+        this.jugador2 = jugador2;
+    }
+
+    public int getCasillas() {
+        return casillas;
+    }
+
+    public void setCasillas(int casillas) {
+        this.casillas = casillas;
+    }
+
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
+
+    public int getPortaaviones() {
+        return portaaviones;
+    }
+
+    public void setPortaaviones(int portaaviones) {
+        this.portaaviones = portaaviones;
+    }
+
+    public int getBuques() {
+        return buques;
+    }
+
+    public void setBuques(int buques) {
+        this.buques = buques;
+    }
+
+    public int getSubmarinos() {
+        return submarinos;
+    }
+
+    public void setSubmarinos(int submarinos) {
+        this.submarinos = submarinos;
+    }
+
+    public int getCruceros() {
+        return cruceros;
+    }
+
+    public void setCruceros(int cruceros) {
+        this.cruceros = cruceros;
+    }
+
+    public int getLanchas() {
+        return lanchas;
+    }
+
+    public void setLanchas(int lanchas) {
+        this.lanchas = lanchas;
     }
     
-    public void settJugador2(Jugador jugador){
-        this.jugador2=jugador;
-    }
+    
 }

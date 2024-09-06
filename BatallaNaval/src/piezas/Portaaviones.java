@@ -14,6 +14,15 @@ public class Portaaviones extends Nave{
     public Portaaviones() {
         super(MAX_VIDA);
     }
+
+    public static int getMAX_VIDA() {
+        return MAX_VIDA;
+    }
+
+    @Override
+    public String toString() {
+        return "Portaaviones{" + '}';
+    }
     
     
     
