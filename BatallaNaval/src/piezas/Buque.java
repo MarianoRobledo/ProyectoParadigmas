@@ -14,5 +14,11 @@ public class Buque extends Nave{
     public Buque() {
         super(MAX_VIDA);
     }
+
+    @Override
+    public String toString() {
+        return "Buque{" + '}';
+    }
+    
     
 }

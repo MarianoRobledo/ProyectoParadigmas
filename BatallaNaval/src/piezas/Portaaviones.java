@@ -18,6 +18,11 @@ public class Portaaviones extends Nave{
     public static int getMAX_VIDA() {
         return MAX_VIDA;
     }
+
+    @Override
+    public String toString() {
+        return "Portaaviones{" + '}';
+    }
     
     
     

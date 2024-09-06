@@ -4,6 +4,7 @@
  */
 package tablero;
 
+import java.util.*;
 import piezas.*;
 
 /**
@@ -14,11 +15,7 @@ public class Tablero {
 
     private Casilla[][] mapa;
     private int cantidadNave;
-    private Portaaviones[] portaviones;
-    private Buque[] buques;
-    private Submarino[] submarinos;
-    private Crucero[] cruceros;
-    private Lancha[] lanchas;
+    private List<Nave> naves;    
     private int barcosHundidos; 
 
     public Tablero() {
@@ -26,55 +23,48 @@ public class Tablero {
 
     public Tablero(int tamaño, int portaavion, int buque, int submarino, int crucero, int lancha) {
         this.mapa = new Casilla[tamaño][tamaño];
+        this.naves = new ArrayList<Nave>();
         for (int i = 0; i < tamaño; i++) {
             for (int j = 0; j < tamaño; j++) {
                 this.mapa[i][j] = new Casilla();
             }
         }
         // this.cantidadNave = cantidadNave;
-        if (portaavion > 0) {
-            this.portaviones = new Portaaviones[portaavion];
-            for (int i = 0; i < portaavion; i++) {
-                this.portaviones[i] = new Portaaviones();
-            }
-        }
-
-        if (buque > 0) {
-            this.buques = new Buque[buque];
-            for (int i = 0; i < buque; i++) {
-                this.buques[i] = new Buque();
-            }
-        }
-        
-        if (submarino > 0) {
-            this.submarinos = new Submarino[submarino];
-            for (int i = 0; i < submarino; i++) {
-                this.submarinos[i] = new Submarino();
+        if (lancha > 0) {
+            for (int i = 0; i < lancha; i++) {
+                this.naves.add( new Lancha() );
             }
         }
         
         if (crucero > 0) {
-            this.cruceros = new Crucero[crucero];
             for (int i = 0; i < crucero; i++) {
-                this.cruceros[i] = new Crucero();
+                this.naves.add( new Crucero() );
             }
         }
         
-        if (lancha > 0) {
-            this.lanchas = new Lancha[lancha];
-            for (int i = 0; i < lancha; i++) {
-                this.lanchas[i] = new Lancha();
+        if (submarino > 0) {
+            for (int i = 0; i < submarino; i++) {
+                this.naves.add( new Submarino() );
             }
         }
+        
+        if (buque > 0) {
+            for (int i = 0; i < buque; i++) {
+                this.naves.add( new Buque() );
+            }
+        }
+        
+        if (portaavion > 0) {
+            for (int i = 0; i < portaavion; i++) {
+                this.naves.add( new Portaaviones() );
+            }
+        }        
 
    //     this.barcosHundidos = barcosHundidos;
     }
 
-    public Casilla[][] getMapa() {
-        return mapa;
-    }
-
-    public void verTableroDePiezas(int tamanio) { //en ves de pasar el tamaño usar el getmapa.length
+    public void verTableroDePiezas() { //en ves de pasar el tamaño usar el getmapa.length
+        int tamanio = this.mapa.length;
         for (int i = 0; i < tamanio; i++) {
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isAgua()){ //Si agua es True
@@ -91,7 +81,8 @@ public class Tablero {
         }
     }
 
-    public void verTableroDeTiros(int tamanio, Tablero tableroEnemigo) {
+    public void verTableroDeTiros(Tablero tableroEnemigo) {
+        int tamanio = this.mapa.length;
         for (int i = 0; i < tamanio; i++) {
             for (int j = 0; j < tamanio; j++) { //Recorro el tablero del enemigo para ver donde he dado tiros
                 if (tableroEnemigo.getMapa()[i][j].isHit()){ //Si hit es True
@@ -115,45 +106,44 @@ public class Tablero {
         tableroEnemigo.getMapa()[i][j].getNave().RecibirDaño(); //Ingreso a la referencia de la nave de esa casilla y utilizo RecibirDaño()
     }
 
-    public void barcosASalvo(){ //Muestra en pantalla la cantidad de barcos de cada tipo aun a salvo
-        if (this.portaviones.length>0){
-            System.out.println("Portaviones: "+ this.portaviones.length);
-        }
-        if (this.buques.length>0){
-            System.out.println("Buques: "+ this.buques.length);
-        }
-        if (this.submarinos.length>0){
-            System.out.println("Submarinos: "+ this.submarinos.length);
-        }
-        if (this.cruceros.length>0){
-            System.out.println("Cruceros: "+ this.cruceros.length);
-        }
-        if (this.lanchas.length>0){
-            System.out.println("Lanchas: "+ this.lanchas.length);
-        }  
+//    public void barcosASalvo(){ //Muestra en pantalla la cantidad de barcos de cada tipo aun a salvo
+//        if (this.portaviones.length>0){
+//            System.out.println("Portaviones: "+ this.portaviones.length);
+//        }
+//        if (this.buques.length>0){
+//            System.out.println("Buques: "+ this.buques.length);
+//        }
+//        if (this.submarinos.length>0){
+//            System.out.println("Submarinos: "+ this.submarinos.length);
+//        }
+//        if (this.cruceros.length>0){
+//            System.out.println("Cruceros: "+ this.cruceros.length);
+//        }
+//        if (this.lanchas.length>0){
+//            System.out.println("Lanchas: "+ this.lanchas.length);
+//        }  
+//    }
+
+    public List<Nave> getNaves() {
+        return naves;
     }
 
-    public Portaaviones[] getPortaviones() {
-        return portaviones;
+    public void setNaves(List<Nave> naves) {
+        this.naves = naves;
     }
 
-    public Buque[] getBuques() {
-        return buques;
+    public void setMapa(Casilla[][] mapa) {
+        this.mapa = mapa;
     }
 
-    public Submarino[] getSubmarinos() {
-        return submarinos;
+    public Casilla[][] getMapa() {
+        return mapa;
     }
 
-    public Crucero[] getCruceros() {
-        return cruceros;
-    }
-
-    public Lancha[] getLanchas() {
-        return lanchas;
+    public void setCasillaIsla(int i, int j, boolean t){
+        this.mapa[i][j].setIsla(t);
     }
     
-    
-    
+        
 
 }

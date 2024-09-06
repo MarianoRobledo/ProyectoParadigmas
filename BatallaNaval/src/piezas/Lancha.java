@@ -14,5 +14,12 @@ public class Lancha extends Nave{
     public Lancha() {
         super(MAX_VIDA);
     }
+
+    @Override
+    public String toString() {
+        return "Lancha{" + '}';
+    }
+    
+    
     
 }
