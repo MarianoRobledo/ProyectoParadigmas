@@ -15,8 +15,8 @@ public class Tablero {
 
     private Casilla[][] mapa;
     private int cantidadNave;
-    private List<Nave> naves;    
-    private int barcosHundidos; 
+    private List<Nave> naves;
+    private int barcosHundidos;
 
     public Tablero() {
     }
@@ -29,51 +29,49 @@ public class Tablero {
                 this.mapa[i][j] = new Casilla();
             }
         }
-        // this.cantidadNave = cantidadNave;
-        if (lancha > 0) {
-            for (int i = 0; i < lancha; i++) {
-                this.naves.add( new Lancha() );
-            }
-        }
         
-        if (crucero > 0) {
-            for (int i = 0; i < crucero; i++) {
-                this.naves.add( new Crucero() );
-            }
-        }
-        
-        if (submarino > 0) {
-            for (int i = 0; i < submarino; i++) {
-                this.naves.add( new Submarino() );
+        if (portaavion > 0) {
+            for (int i = 0; i < portaavion; i++) {
+                this.naves.add(new Portaaviones());
             }
         }
         
         if (buque > 0) {
             for (int i = 0; i < buque; i++) {
-                this.naves.add( new Buque() );
+                this.naves.add(new Buque());
             }
         }
         
-        if (portaavion > 0) {
-            for (int i = 0; i < portaavion; i++) {
-                this.naves.add( new Portaaviones() );
+        if (submarino > 0) {
+            for (int i = 0; i < submarino; i++) {
+                this.naves.add(new Submarino());
             }
-        }        
+        }
+        
+        if (crucero > 0) {
+            for (int i = 0; i < crucero; i++) {
+                this.naves.add(new Crucero());
+            }
+        }
 
-   //     this.barcosHundidos = barcosHundidos;
+        if (lancha > 0) {
+            for (int i = 0; i < lancha; i++) {
+                this.naves.add(new Lancha());
+            }
+        }
     }
 
     public void verTableroDePiezas() { //en ves de pasar el tamaño usar el getmapa.length
         int tamanio = this.mapa.length;
         for (int i = 0; i < tamanio; i++) {
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
-                if (this.mapa[i][j].isAgua()){ //Si agua es True
-                    System.out.print("[ ]");
-                }else if(this.mapa[i][j].isIsla()){ //Si isla es True
+                if (this.mapa[i][j].isIsla()) { //Si isla es True
                     System.out.print("[I]");
-                }else if(this.mapa[i][j].isBarcoAlLado()){ //Si esta al lado de una nave
+                } else if (this.mapa[i][j].isBarcoAlLado()) { //Si la casilla contiene un barco a su lado
                     System.out.print("[-]");
-                }else{//Si hay una nave
+                } else if (this.mapa[i][j].isAgua()) { //Si agua es True
+                    System.out.print("[ ]");
+                } else {//Si hay una nave
                     System.out.print("[N]");
                 }
             }
@@ -85,15 +83,15 @@ public class Tablero {
         int tamanio = this.mapa.length;
         for (int i = 0; i < tamanio; i++) {
             for (int j = 0; j < tamanio; j++) { //Recorro el tablero del enemigo para ver donde he dado tiros
-                if (tableroEnemigo.getMapa()[i][j].isHit()){ //Si hit es True
-                    if (tableroEnemigo.getMapa()[i][j].isAgua()){ //Si agua es True
-                    System.out.print("[O]");
-                    }else if(tableroEnemigo.getMapa()[i][j].isIsla()){ //Si isla es True
+                if (tableroEnemigo.getMapa()[i][j].isHit()) { //Si hit es True
+                    if (tableroEnemigo.getMapa()[i][j].isAgua()) { //Si agua es True
                         System.out.print("[O]");
-                    }else{ //Si hay una nave
+                    } else if (tableroEnemigo.getMapa()[i][j].isIsla()) { //Si isla es True
+                        System.out.print("[O]");
+                    } else { //Si hay una nave
                         System.out.print("[X]");
                     }
-                }else{ //Si no se disparo en esa casilla
+                } else { //Si no se disparo en esa casilla
                     System.out.print("[ ]");
                 }
             }
@@ -123,7 +121,6 @@ public class Tablero {
 //            System.out.println("Lanchas: "+ this.lanchas.length);
 //        }  
 //    }
-
     public List<Nave> getNaves() {
         return naves;
     }
@@ -140,10 +137,9 @@ public class Tablero {
         return mapa;
     }
 
-    public void setCasillaIsla(int i, int j, boolean t){
+    public void setCasillaIsla(int i, int j, boolean t) {
+        this.mapa[i][j].setAgua(false);
         this.mapa[i][j].setIsla(t);
     }
-    
-        
 
 }
