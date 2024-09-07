@@ -4,6 +4,7 @@
  */
 package batallanaval;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -28,16 +29,16 @@ public class BatallaNaval {
 
     public BatallaNaval() {
   //      this.casillas = MIN_CANTIDAD_CASILLAS;
-        this.tamaño = 10;
+        this.tamaño = 5;
         this.portaaviones = 1;
-        this.buques = 1;
-        this.submarinos = 1;
-        this.cruceros = 1;
-        this.lanchas = 1;
+        this.buques = 0;
+        this.submarinos = 0;
+        this.cruceros = 0;
+        this.lanchas = 0;
     }
 
-    public void iniciarJuego() {
-
+    public boolean ataque(Jugador jugador, String fila, int columna, String[] filas) {
+        return jugador.getTablero().marcarAtaque(Arrays.asList(jugador.filas(jugador.getTablero().getMapa().length)).indexOf(fila), columna, jugador.getTablero());
     }
 
     public void settearParametros() {
@@ -49,7 +50,8 @@ public class BatallaNaval {
                 System.out.println("Que quieres modificar\n"
                         + "1: Tamaño del mapa\n"
                         + "2: Disposicion de barcos,\n"
-                        + "3: Salir");
+                        + "3: Ver las naves actuales\n"
+                        + "4: Salir");
 
                 res = r.nextInt();
                 r.nextLine();//para que no haya problema con el buffer
@@ -57,16 +59,25 @@ public class BatallaNaval {
                 switch (res) {
                     case 1:
                         settTamaño();
+                        r.reset();
                         break;
                     case 2:
                         settNaves();
+                        r.reset();
                         break;
                     case 3:
+                        System.out.println("");
+                        System.out.println(mostrarParametros());
+                        System.out.println("");
+                        r.reset();
+                        break;
+                    case 4:
                         flag=false;  
                         break;
                     default:
                         System.out.println("Dar un numero correcto");
                         System.out.println("");
+                        r.reset();
                         break;
                 }
 
@@ -75,6 +86,7 @@ public class BatallaNaval {
                 System.out.println("Dar un numero valido");
                 System.out.println("");
                 r.nextLine();
+                r.reset();
             }
         }
 
@@ -86,6 +98,7 @@ public class BatallaNaval {
         
         String res;
         while (flag) {
+            r.reset();
             try {
                 System.out.println("Elegir entre la opcion A= 5x5, B= 10x10, C= 15x15 ");
                 res = r.nextLine();
@@ -250,14 +263,7 @@ public class BatallaNaval {
     }
     
 
-    public Scanner getR() {
-        return r;
-    }
-
-    public void setR(Scanner r) {
-        this.r = r;
-    }
-
+    
     public Jugador getJugador1() {
         return jugador1;
     }
@@ -274,13 +280,6 @@ public class BatallaNaval {
         this.jugador2 = jugador2;
     }
 
-    public int getCasillas() {
-        return casillas;
-    }
-
-    public void setCasillas(int casillas) {
-        this.casillas = casillas;
-    }
 
     public int getTamaño() {
         return tamaño;

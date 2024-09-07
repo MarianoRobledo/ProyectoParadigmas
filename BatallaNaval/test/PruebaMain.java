@@ -20,7 +20,7 @@ public class PruebaMain {
         BatallaNaval b1 = new BatallaNaval();
 
         System.out.println("");
-   //    b1.settearParametros();
+        b1.settearParametros();
 
         Tablero t1 = new Tablero(b1.getTamaño(), b1.getPortaaviones(), b1.getBuques(), b1.getSubmarinos(), b1.getCruceros(), b1.getLanchas());
 
@@ -37,12 +37,14 @@ public class PruebaMain {
 // 
 //        System.out.println("1 " + t1.getMapa()[Arrays.asList(fila).indexOf("A")][1].isAgua());
 //        System.out.println("2 " + t1.getMapa()[Arrays.asList(fila).indexOf("A")][1].isBarcoAlLado());
-
-
         Jugador j1 = new Jugador("mariano", t1);
         j1.colocarNave();
         System.out.println("");
         t1.verTableroDePiezas();
+        System.out.println("");
+        t1.verTableroDeTiros(t1);
+
+        System.out.println(t1.getMapa()[0][1].getNave() != null);
 
     }
 }

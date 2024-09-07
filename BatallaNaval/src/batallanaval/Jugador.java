@@ -25,6 +25,24 @@ public class Jugador {
         this.tablero = tablero;
     }
 
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
+    
+    
+    
     public void atacar() {
 
     }
@@ -46,10 +64,11 @@ public class Jugador {
                 r.reset();
                 System.out.println("Se procede a colocar una pieza de tipo " + nave.getClass().getSimpleName());
                 fila = darFila(filas, tamanio);
+
                 columna = darColumna(tamanio);
 
                 if (movimiento(fila, columna, nave, filas)) {
-                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + columna);
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + (columna+1));
                     flag = false;
                     r.reset();
                 }
@@ -70,7 +89,7 @@ public class Jugador {
         if ((j + size - 1) > tamanio - 1) {// si esta fuera de rango no se puede colocar esa pieza
             flag = false;
         } else {//comprueba si toda la trayectoria esta libre
-            for (int k = 0; k < size - 1; k++) {
+            for (int k = 0; k < size ; k++) {
                 if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j + k].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j + k].isIsla() == true) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j + k].isBarcoAlLado() == true)) {
                     flag = false;
                 }
@@ -84,7 +103,7 @@ public class Jugador {
         if ((Arrays.asList(filas).indexOf(i.toUpperCase()) + size - 1) > tamanio - 1) {// si esta fuera de rango no se puede colocar esa pieza
             flag = false;
         } else {//comprueba si toda la trayectoria esta libre
-            for (int k = 0; k < size - 1; k++) {
+            for (int k = 0; k < size ; k++) {
                 if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase()) + k][j].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase()) + k][j].isIsla() == true) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase()) + k][j].isBarcoAlLado() == true)) {
                     flag = false;
                 }
@@ -92,8 +111,9 @@ public class Jugador {
         }
         return flag;
     }
-
-    private String[] filas(int size) {//devuelve el array de filas 
+  
+    //Modificacion del metodo, ahora es publico
+    public String[] filas(int size) {//devuelve el array de filas 
         String[] fila;
         switch (size) {
             case 5: {
@@ -113,7 +133,8 @@ public class Jugador {
         return fila;
     }
 
-    private String darFila(String[] filas, int size) {// devuelve el  valor de la fila1
+    //Modificacion del metodo, ahora es publico
+    public String darFila(String[] filas, int size) {// devuelve el  valor de la fila1
         String res = "";
         r.reset();
         boolean flag = true;
@@ -138,7 +159,8 @@ public class Jugador {
         return res.toUpperCase();
     }
 
-    private int darColumna(int size) {//devuelve el valor de la columna
+    //Modificacion del metodo, ahora es publico
+    public int darColumna(int size) {//devuelve el valor de la columna
         int columna = 0;
         boolean flag = true;
 
@@ -400,13 +422,13 @@ public class Jugador {
                 if (columna < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
                 }
-                if (columna >= 1 && Arrays.asList(filas).indexOf(fila.toUpperCase()) < filas.length - 1) {
+                if (columna >= 1 && (((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
                 }
-                if (columna < filas.length - 1 && Arrays.asList(filas).indexOf(fila.toUpperCase()) < filas.length - 1) {
+                if (columna < filas.length - 1 && (((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna + 1].setBarcoAlLado(true);//diagonal inferior der de la pos inicial
                 }
-                if (Arrays.asList(filas).indexOf(fila.toUpperCase()) < filas.length - 1) {
+                if ((((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna].setBarcoAlLado(true);//elemento abajo de la pos inicial
                 }
             }
