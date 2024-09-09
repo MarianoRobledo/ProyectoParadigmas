@@ -1,8 +1,10 @@
 
+
 import batallanaval.*;
 import java.util.*;
 import piezas.Nave;
 import tablero.Casilla;
+
 import tablero.Tablero;
 
 /*
@@ -16,6 +18,7 @@ import tablero.Tablero;
 public class PruebaMain {
 
     public static void main(String[] args) {
+
 
         BatallaNaval b1 = new BatallaNaval();
 
@@ -45,6 +48,20 @@ public class PruebaMain {
         t1.verTableroDeTiros(t1);
 
         System.out.println(t1.getMapa()[0][1].getNave() != null);
+      
+
+
+        
+        
+        Tablero t= new Tablero(15,1,2,0,1,0);
+        t.verTableroDePiezas();
+        System.out.println("");
+        t.insertarIslas();
+        System.out.println("");
+        t.verTableroDePiezas();
+        t.barcosASalvo();
+        t.barcosHundidos();
+        
 
     }
 }

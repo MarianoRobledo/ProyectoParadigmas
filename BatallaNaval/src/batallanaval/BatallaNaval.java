@@ -263,13 +263,13 @@ public class BatallaNaval {
     }
     
 
-    
     public Jugador getJugador1() {
         return jugador1;
     }
 
     public void setJugador1(Jugador jugador1) {
         this.jugador1 = jugador1;
+
     }
 
     public Jugador getJugador2() {
@@ -279,7 +279,6 @@ public class BatallaNaval {
     public void setJugador2(Jugador jugador2) {
         this.jugador2 = jugador2;
     }
-
 
     public int getTamaño() {
         return tamaño;

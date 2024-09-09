@@ -15,8 +15,10 @@ public class Tablero {
 
     private Casilla[][] mapa;
     private int cantidadNave;
+
     private List<Nave> naves;
     private int barcosHundidos;
+
 
     public Tablero() {
     }
@@ -29,6 +31,7 @@ public class Tablero {
                 this.mapa[i][j] = new Casilla();
             }
         }
+
         insertarIslas();
 
         if (portaavion > 0) {
@@ -40,11 +43,13 @@ public class Tablero {
         if (buque > 0) {
             for (int i = 0; i < buque; i++) {
                 this.naves.add(new Buque());
+
             }
         }
 
         if (submarino > 0) {
             for (int i = 0; i < submarino; i++) {
+
                 this.naves.add(new Submarino());
             }
         }
@@ -60,6 +65,7 @@ public class Tablero {
                 this.naves.add(new Lancha());
             }
         }
+
     }
 //Ver como mostrar el mapa ya que cuando s ecargan las naves es importante ve si hay naves al lado o no
 //Hay que ver si tenemos dos metodos uno para poner naves y otro para el juego 
@@ -67,6 +73,7 @@ public class Tablero {
 
     public void verTableroDePiezas() { //en ves de pasar el tamaño usar el getmapa.length
         int tamanio = this.mapa.length;
+
         for (int i = 0; i < tamanio; i++) {
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isIsla()) { //Si isla es True
@@ -96,6 +103,7 @@ public class Tablero {
                 } else if (this.mapa[i][j].isHit()) {
                     System.out.print("[X]");//Si fue golpeado es True
                 } else {//Si hay una nave
+
                     System.out.print("[N]");
                 }
             }
@@ -269,6 +277,7 @@ public class Tablero {
         }
     }
 
+
     public void barcosHundidos() {
         Iterator<Nave> it = this.naves.iterator();
         int portaaviones = 0;
@@ -312,6 +321,7 @@ public class Tablero {
         }
     }
 
+
     public List<Nave> getNaves() {
         return naves;
     }
@@ -328,9 +338,11 @@ public class Tablero {
         return mapa;
     }
 
+
     public void setCasillaIsla(int i, int j, boolean t) {
         this.mapa[i][j].setAgua(false);
         this.mapa[i][j].setIsla(t);
     }
+
 
 }

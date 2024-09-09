@@ -25,6 +25,7 @@ public class Jugador {
         this.tablero = tablero;
     }
 
+
     public String getNick() {
         return nick;
     }
@@ -45,17 +46,26 @@ public class Jugador {
     
     public void atacar() {
 
+
+    
+    
+    
+    public void atacar() {
+        
     }
 
     public void colocarNave() {
         Iterator<Nave> it = tablero.getNaves().iterator();
+
         int columna, tamanio;
+
         String fila;
         tamanio = tablero.getMapa().length;
 
         String[] filas = filas(tamanio);
 
         while (it.hasNext()) {
+
             boolean flag = true;
             Nave nave = it.next();
             while (flag) {
@@ -71,9 +81,12 @@ public class Jugador {
                     System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + (columna+1));
                     flag = false;
                     r.reset();
+
                 }
             }
+
         }
+
     }
 
     private void ponerNaves(Nave nave, int size) {
@@ -422,6 +435,7 @@ public class Jugador {
                 if (columna < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
                 }
+
                 if (columna >= 1 && (((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
                 }
@@ -430,6 +444,7 @@ public class Jugador {
                 }
                 if ((((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna].setBarcoAlLado(true);//elemento abajo de la pos inicial
+
                 }
             }
         }
