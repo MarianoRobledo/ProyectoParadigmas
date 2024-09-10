@@ -4,6 +4,8 @@
  */
 package tablero;
 
+import batallanaval.IMuestraTablero;
+import batallanaval.Jugador;
 import java.util.*;
 import piezas.*;
 
@@ -11,7 +13,7 @@ import piezas.*;
  *
  * @author Mariano
  */
-public class Tablero {
+public class Tablero implements IMuestraTablero{
 
     private Casilla[][] mapa;
     private int cantidadNave;
@@ -72,9 +74,26 @@ public class Tablero {
 //De momento creo otro metodo para probar
 
     public void verTableroDePiezas() { //en ves de pasar el tamaño usar el getmapa.length
+        
+        String[] filas;
         int tamanio = this.mapa.length;
-
+        for (int k = 0; k <= tamanio; k++){
+            if (k==0){
+                System.out.print("  ");
+            }else{
+                if (k<=10){
+                    System.out.print(" " + k + " ");
+                }else{
+                    System.out.print(k + " ");
+                }
+                
+            }
+        }
+        System.out.println("");
+        filas=filas(this.mapa.length);
+        
         for (int i = 0; i < tamanio; i++) {
+            System.out.print(filas[i] + " ");
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isIsla()) { //Si isla es True
                     System.out.print("[I]");
@@ -91,19 +110,31 @@ public class Tablero {
     }
 
     public void verTableroDePiezasEnJuego() { //en ves de pasar el tamaño usar el getmapa.length
+        String[] filas;
         int tamanio = this.mapa.length;
+        for (int k = 0; k <= tamanio; k++){
+            if (k==0){
+                System.out.print("  ");
+            }else{
+                if (k<=10){
+                    System.out.print(" " + k + " ");
+                }else{
+                    System.out.print(k + " ");
+                }
+            }
+        }
+        System.out.println("");
+        filas=filas(this.mapa.length);
         for (int i = 0; i < tamanio; i++) {
+            System.out.print(filas[i] + " ");
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isIsla()) { //Si isla es True
                     System.out.print("[I]");
-                } else if (this.mapa[i][j].isBarcoAlLado()) { //Si la casilla contiene un barco a su lado
-                    System.out.print("[-]");
                 } else if (this.mapa[i][j].isAgua()) { //Si agua es True
                     System.out.print("[ ]");
                 } else if (this.mapa[i][j].isHit()) {
                     System.out.print("[X]");//Si fue golpeado es True
                 } else {//Si hay una nave
-
                     System.out.print("[N]");
                 }
             }
@@ -112,8 +143,23 @@ public class Tablero {
     }
 
     public void verTableroDeTiros(Tablero tableroEnemigo) {
+        String[] filas;
         int tamanio = this.mapa.length;
+        for (int k = 0; k <= tamanio; k++){
+            if (k==0){
+                System.out.print("  ");
+            }else{
+                if (k<=10){
+                    System.out.print(" " + k + " ");
+                }else{
+                    System.out.print(k + " ");
+                }
+            }
+        }
+        System.out.println("");
+        filas=filas(this.mapa.length);
         for (int i = 0; i < tamanio; i++) {
+            System.out.print(filas[i] + " ");
             for (int j = 0; j < tamanio; j++) { //Recorro el tablero del enemigo para ver donde he dado tiros
                 if (tableroEnemigo.getMapa()[i][j].isHit()) { //Si hit es True
                     if (tableroEnemigo.getMapa()[i][j].isAgua()) { //Si agua es True
@@ -343,6 +389,25 @@ public class Tablero {
         this.mapa[i][j].setAgua(false);
         this.mapa[i][j].setIsla(t);
     }
+    
+    public String[] filas(int size){//devuelve el array de filas 
+        String[] fila;
+        switch (size) {
+            case 5: {
+                fila = new String[]{"A", "B", "C", "D", "E"};
+                break;
+            }
+            case 10: {
+                fila = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+                break;
+            }
+            default: {
+                fila = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"};
+                break;
+            }
+        }
 
+        return fila;
+    }
 
 }

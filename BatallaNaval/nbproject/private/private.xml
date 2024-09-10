@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Mariano/ProyectoParadigmas/BatallaNaval/src/batallanaval/Jugador.java</file>
-            <file>file:/C:/Users/Mariano/ProyectoParadigmas/BatallaNaval/test/PruebaMain.java</file>
-            <file>file:/C:/Users/Mariano/ProyectoParadigmas/BatallaNaval/src/tablero/Tablero.java</file>
-            <file>file:/C:/Users/Mariano/ProyectoParadigmas/BatallaNaval/src/batallanaval/BatallaNaval.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/batallanaval/BatallaNaval.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/batallanaval/Jugador.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/piezas/Nave.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/tablero/Casilla.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/tablero/Tablero.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/piezas/Portaaviones.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/batallanaval/IMuestraTablero.java</file>
+            <file>file:/E:/Facultad_UNCUYO%20(General)/4°%20Semestre/Paradigmas%20de%20Programacion/2024/ProyectoParadigmas/BatallaNaval/src/batallanaval/Main.java</file>
         </group>
     </open-files>
 </project-private>
