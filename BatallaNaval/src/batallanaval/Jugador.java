@@ -13,13 +13,17 @@ import tablero.Tablero;
  *
  * @author Mariano
  */
-public class Jugador {
+public class Jugador implements IMuestraTablero{
 
     Scanner r = new Scanner(System.in);
 
     private String nick;
     private Tablero tablero;
-
+    
+    public Jugador(){
+        
+    }
+    
     public Jugador(String nick, Tablero tablero) {
         this.nick = nick;
         this.tablero = tablero;
@@ -44,12 +48,7 @@ public class Jugador {
     
     
     
-    public void atacar() {
-
-
-    
-    
-    
+   
     public void atacar() {
         
     }
@@ -126,7 +125,7 @@ public class Jugador {
     }
   
     //Modificacion del metodo, ahora es publico
-    public String[] filas(int size) {//devuelve el array de filas 
+    public String[] filas(int size){//devuelve el array de filas 
         String[] fila;
         switch (size) {
             case 5: {
