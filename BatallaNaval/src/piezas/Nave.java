@@ -23,6 +23,11 @@ public abstract class Nave {
 
     public void RecibirDaño(){
         this.vida-=1;
+        if(this.vida>0){
+            System.out.println("¡Averiado!");
+        }else{
+            System.out.println("¡Hundido!");
+        }
     }
 
     public int getVida() {
