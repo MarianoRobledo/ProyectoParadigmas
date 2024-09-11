@@ -12,7 +12,7 @@ public class Lancha extends Nave{
     private final static int MAX_VIDA=1;
 
     public Lancha() {
-        super(MAX_VIDA);
+        super(MAX_VIDA, false);
     }
 
     @Override

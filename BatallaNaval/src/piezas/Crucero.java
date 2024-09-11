@@ -12,7 +12,7 @@ public class Crucero extends Nave{
     private final static int MAX_VIDA=2;
 
     public Crucero() {
-        super(MAX_VIDA);
+        super(MAX_VIDA, false);
     }
 
     @Override

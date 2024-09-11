@@ -11,7 +11,8 @@ package piezas;
 public abstract class Nave {
 
     protected int vida;
-
+    protected boolean poder;
+    
     public Nave() {
     }
 
@@ -19,6 +20,10 @@ public abstract class Nave {
         this.vida = vida;
     }
     
+    public Nave(int vida, boolean poder){
+        this.vida = vida;
+        this.poder = poder;
+    }
     
 
     public void RecibirDaño(){
@@ -32,6 +37,14 @@ public abstract class Nave {
 
     public int getVida() {
         return vida;
+    }
+
+    public boolean isPoder() {
+        return poder;
+    }
+
+    public void setPoder(boolean poder) {
+        this.poder = poder;
     }
     
     

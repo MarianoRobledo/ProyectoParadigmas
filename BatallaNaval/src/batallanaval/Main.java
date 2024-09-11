@@ -5,6 +5,7 @@
 package batallanaval;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import piezas.Nave;
@@ -74,11 +75,32 @@ public class Main {
             flag=true;
             //TURNO DEL JUGADOR 1
             while (flag) {
+                res="";
                 ataqueDisponible=false;
                 selector = verificadorDeNumero();
                 if (selector == 1) {
+                    
+                    if (poderDisponible(j1)){
+                        while (!res.equals("1") && !res.equals("2")){
+                            System.out.println("1: Utilizar poder\n"+
+                                               "2: Ataque");
+                            res=r.nextLine();
+                            if(res.equals("1")){
+                                ataqueDisponible=true;
+                                flag=mostrarPoderes(j1,j2);
+                                if(!quedanBarcosASalvo(j2)){
+                                    System.out.println("¡Has destruido todas las naves enemigas!");
+                                    flag=false;
+                                    juego=false;
+                                }
+                            }else if (!res.equals("1") && !res.equals("2")){
+                                System.out.println("Ingrese un numero valido");
+                            }
+                        }
+                        
+                    }
                     while(!ataqueDisponible){
-                       System.out.println("");
+                        System.out.println("");
                         System.out.println("Dar las posicion a atacar");
                         System.out.println("");    
                         
@@ -128,9 +150,29 @@ public class Main {
             
             //TURNO DEL JUGADOR 2
             while (flag) {
+                res="";
                 ataqueDisponible=false;
                 selector = verificadorDeNumero();
                 if (selector == 1) {
+                    if (poderDisponible(j2)){
+                        while (!res.equals("1") && !res.equals("2")){
+                            System.out.println("1: Utilizar poder\n"+
+                                               "2: Ataque");
+                            res=r.nextLine();
+                            if(res.equals("1")){
+                                ataqueDisponible=true;
+                                flag=mostrarPoderes(j2,j1);
+                                if(!quedanBarcosASalvo(j1)){
+                                    System.out.println("¡Has destruido todas las naves enemigas!");
+                                    flag=false;
+                                    juego=false;
+                                }  
+                            }else if (!res.equals("1") && !res.equals("2")){
+                                System.out.println("Ingrese un numero valido");
+                            }
+                        }
+                        
+                    }
                     while(!ataqueDisponible){
                         System.out.println("");
                         System.out.println("Dar las posicion a atacar");
@@ -177,9 +219,9 @@ public class Main {
 
         }
         if(tirosAcertadosJ1>tirosAcertadosJ2){
-            System.out.println("gano jugador1");
+            System.out.println("Gano " + j1.getNick());
         }else if(tirosAcertadosJ2>tirosAcertadosJ1){
-            System.out.println("gano jugador2");
+            System.out.println("Gano "+ j2.getNick());
         }else{
             System.out.println("Empate");
         }
@@ -218,6 +260,7 @@ public class Main {
         return (jugador.getTablero().getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isHit()==false);
     }
     
+    //FUNCION QUE VERIFICA SI QUEDA ALGUN BARCO A SALVO DEL JUGADOR
     private static boolean quedanBarcosASalvo(Jugador jugador) {
         boolean hayBarcosASalvo = false;
 
@@ -235,4 +278,354 @@ public class Main {
 
         return hayBarcosASalvo;
     }
+    
+    //FUNCION QUE VERIFICA SI EXISTE ALGUN PODER PARA USAR
+    private static boolean poderDisponible(Jugador jugador) {
+        boolean hayBarcosASalvo = false;
+
+        // Obtener la lista de naves del tablero del jugadorEnemigo
+        List<Nave> naves = jugador.getTablero().getNaves();
+
+        // Iterar sobre la lista de naves
+        for (Nave nave : naves) {
+            // Comprobar si la nave tiene vida (es decir, está a salvo)
+            if (nave.isPoder()==true) {
+                hayBarcosASalvo = true;
+                break; // No es necesario continuar si ya encontramos un barco a salvo
+            }
+        }
+
+        return hayBarcosASalvo;
+    }
+    
+    //FUNCION QUE SE ENCARGA DE EJECUTAR LOS PODERES
+    public static boolean mostrarPoderes(Jugador jugador1, Jugador jugadorEnemigo) {
+        boolean acertoAtaque=false;
+        Iterator<Nave> it = jugador1.getTablero().getNaves().iterator();
+        int portaaviones = 0;
+        int buque = 0;
+        int submarino = 0;
+        Scanner r = new Scanner(System.in);
+        String res;
+        
+        while (it.hasNext()) {
+            Nave nave = it.next();
+            if (nave.getClass().getSimpleName().equals("Portaaviones") && nave.isPoder() == true) {
+                portaaviones++;
+            } else if (nave.getClass().getSimpleName().equals("Buque") && nave.isPoder() == true) {
+                buque++;
+            } else if (nave.getClass().getSimpleName().equals("Submarino") && nave.isPoder() == true) {
+                submarino++;
+            }
+
+        }
+        if (portaaviones > 0) {
+            System.out.println("Tienes " + portaaviones + " de portaaviones disponibles (Opcion P)");
+        }
+        if (buque > 0) {
+            System.out.println("Tienes " + buque + " de buques disponibles (Opcion B)");
+        }
+        if (submarino > 0) {
+            System.out.println("Tienes " + submarino + " de submarinos disponibles (Opcion S)");
+        }
+        
+        boolean flag=true;
+        String fila;
+        String [] filas;
+        int i;
+        int columna;
+        while (flag){
+            System.out.println("ELIJA UNA OPCION");
+            res=r.nextLine();
+            res=res.toUpperCase();
+            if (!res.equals("P") && !res.equals("B") && !res.equals("S")){
+                System.out.println("Opciones disponibles: ");
+                if (portaaviones > 0) {
+                    System.out.println(" P ");
+                }
+                if (buque > 0) {
+                    System.out.println(" B ");
+                }
+                if (submarino > 0) {
+                    System.out.println(" S ");
+                }
+            
+            
+            }
+            if (res.equals("P")){
+                if (portaaviones>0){
+                    System.out.println("");
+                    System.out.println("Dar las posicion a atacar");
+                    System.out.println("");    
+                    filas=jugador1.filas(jugador1.getTablero().getMapa().length);
+                    fila = jugadorEnemigo.darFila(filas, jugador1.getTablero().getMapa().length);
+                    columna = jugadorEnemigo.darColumna(jugador1.getTablero().getMapa().length);
+                    i=Arrays.asList(filas).indexOf(fila.toUpperCase());
+                    if (i<jugador1.getTablero().getMapa().length-2 && columna<jugador1.getTablero().getMapa().length-2){
+                        System.out.println("1: Atacar hacia abajo\n" +
+                                           "2: Atacar hacia la derecha");
+                        while (!res.equals("1") && !res.equals("2")){
+                            res=r.nextLine();
+                            if (res.equals("1")){
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+                                if (jugadorEnemigo.getTablero().getMapa()[i+1][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i+1][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i+1, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i+1][columna].setHit(true);
+                                if (jugadorEnemigo.getTablero().getMapa()[i+2][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i+2][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i+2, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i+2][columna].setHit(true);
+                            }else if(res.equals("2")){
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+                                
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna+1].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna+1].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna+1, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna+1].setHit(true);
+                                
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna+2].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna+2].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna+2, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna+2].setHit(true);
+                            } 
+                        }
+                        flag=false;
+                    }else if (columna<jugador1.getTablero().getMapa().length-2){
+                        System.out.println("1: Atacar hacia la derecha");
+                        res=r.nextLine();
+                        if (res.equals("1")){
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna+1].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna+1].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna+1, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna+1].setHit(true);
+
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna+2].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna+2].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna+2, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna+2].setHit(true);
+                        }
+                        flag=false;
+                    }else if (i<jugador1.getTablero().getMapa().length-2){
+                        System.out.println("1: Atacar hacia abajo");
+                        res=r.nextLine();
+                        if(res.equals("1")){
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+                            if (jugadorEnemigo.getTablero().getMapa()[i+1][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i+1][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i+1, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i+1][columna].setHit(true);
+                            if (jugadorEnemigo.getTablero().getMapa()[i+2][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i+2][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i+2, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i+2][columna].setHit(true);
+                        }
+                        flag=false;
+                    }else{
+                        System.out.println("");
+                        System.out.println("POSICION NO VALIDA");
+                        System.out.println("");
+                    }
+                    if (acertoAtaque==true){
+                        it = jugador1.getTablero().getNaves().iterator();
+                        while (it.hasNext()) {
+                            Nave nave = it.next();
+                            if (nave.getClass().getSimpleName().equals("Portaaviones") && nave.isPoder()==true) {
+                                nave.setPoder(false);
+                                break;
+                            }
+                            
+
+                        }
+                    }
+                    
+                }else{
+                    System.out.println("No tiene portaaviones con poderes habilitados");
+                }
+                  
+            }
+            if (res.equals("B")){
+                if (buque > 0){
+                    System.out.println("");
+                    System.out.println("Dar las posicion a atacar");
+                    System.out.println("");    
+                    filas=jugador1.filas(jugador1.getTablero().getMapa().length);
+                    fila = jugadorEnemigo.darFila(filas, jugador1.getTablero().getMapa().length);
+                    columna = jugadorEnemigo.darColumna(jugador1.getTablero().getMapa().length);
+                    i=Arrays.asList(filas).indexOf(fila.toUpperCase());
+                    if (i<jugador1.getTablero().getMapa().length-1 && columna<jugador1.getTablero().getMapa().length-1){
+                        System.out.println("1: Atacar hacia abajo\n" +
+                                           "2: Atacar hacia la derecha");
+                        while (!res.equals("1") && !res.equals("2")){
+                            res=r.nextLine();
+                            if (res.equals("1")){
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+                                if (jugadorEnemigo.getTablero().getMapa()[i+1][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i+1][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i+1, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i+1][columna].setHit(true);
+                            }else if(res.equals("2")){
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+                                
+                                if (jugadorEnemigo.getTablero().getMapa()[i][columna+1].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna+1].getNave() != null){
+                                    acertoAtaque=true;
+                                    jugadorEnemigo.getTablero().marcarAtaque(i, columna+1, jugadorEnemigo.getTablero());
+                                }
+                                jugadorEnemigo.getTablero().getMapa()[i][columna+1].setHit(true);
+                            } 
+                        }
+                        flag=false;
+
+
+                    }else if (columna<jugador1.getTablero().getMapa().length-1){
+                        System.out.println("1: Atacar hacia la derecha");
+                        res=r.nextLine();
+                        if (res.equals("1")){
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna+1].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna+1].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna+1, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna+1].setHit(true);
+                        }
+                        flag=false;
+                    }else if (i<jugador1.getTablero().getMapa().length-1){
+                        System.out.println("1: Atacar hacia abajo");
+                        res=r.nextLine();
+                        if(res.equals("1")){
+                            
+                            if (jugadorEnemigo.getTablero().getMapa()[i][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setHit(true);
+                            if (jugadorEnemigo.getTablero().getMapa()[i+1][columna].isHit()==false && jugadorEnemigo.getTablero().getMapa()[i+1][columna].getNave() != null){
+                                acertoAtaque=true;
+                                jugadorEnemigo.getTablero().marcarAtaque(i+1, columna, jugadorEnemigo.getTablero());
+                            }
+                            jugadorEnemigo.getTablero().getMapa()[i+1][columna].setHit(true);
+                        } 
+                        flag=false;
+                    }else{
+                        System.out.println("");
+                        System.out.println("POSICION INVALIDA");
+                        System.out.println("");
+                    }
+                    if (acertoAtaque==true){
+                        it = jugador1.getTablero().getNaves().iterator();
+                        while (it.hasNext()) {
+                            Nave nave = it.next();
+                            if (nave.getClass().getSimpleName().equals("Buque") && nave.isPoder()==true) {
+                                nave.setPoder(false);
+                                break;
+                            }
+                        }
+                    }
+                    
+                }else{
+                    System.out.println("No tiene buques con poderes habilitados");
+                }
+                
+            }
+            if (res.equals("S")){
+                if (submarino>0){
+                    System.out.println("");
+                    System.out.println("Dar las posicion a atacar");
+                    System.out.println("");    
+                    filas=jugador1.filas(jugador1.getTablero().getMapa().length);
+                    fila = jugadorEnemigo.darFila(filas, jugador1.getTablero().getMapa().length);
+                    columna = jugadorEnemigo.darColumna(jugador1.getTablero().getMapa().length);
+                    i=Arrays.asList(filas).indexOf(fila.toUpperCase());
+                    if (i == jugador1.getTablero().getMapa().length - 1) {
+                        if (columna == jugador1.getTablero().getMapa().length - 1) {
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i - 1][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i][columna - 1].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i - 1][columna - 1].setSonar(true);
+                        } else {
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i - 1][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i][columna + 1].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i - 1][columna + 1].setSonar(true);
+                        }
+                        
+                        it = jugador1.getTablero().getNaves().iterator();
+                        while (it.hasNext()) {
+                            Nave nave = it.next();
+                            if (nave.getClass().getSimpleName().equals("Submarino") && nave.isPoder()==true) {
+                                nave.setPoder(false);
+                                break;
+                            }
+                        }
+                        
+                    } else {
+                        if (columna == jugador1.getTablero().getMapa().length - 1) {
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i + 1][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i][columna - 1].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i + 1][columna - 1].setSonar(true);
+                        } else {
+                            jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i + 1][columna].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i][columna + 1].setSonar(true);
+                            jugadorEnemigo.getTablero().getMapa()[i + 1][columna + 1].setSonar(true);
+                        }
+                        it = jugador1.getTablero().getNaves().iterator();
+                        while (it.hasNext()) {
+                            Nave nave = it.next();
+                            if (nave.getClass().getSimpleName().equals("Submarino") && nave.isPoder()==true) {
+                                nave.setPoder(false);
+                                break;
+                            }
+                        }
+                    }
+                    flag=false;
+                }else{
+                    System.out.println("No tiene submarinos con poderes habilitados");
+                }
+            }
+        }
+        return acertoAtaque;
+    }
+    
 }

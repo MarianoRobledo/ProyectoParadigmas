@@ -4,6 +4,8 @@
  */
 package piezas;
 
+import batallanaval.Jugador;
+
 /**
  *
  * @author Mariano
@@ -12,7 +14,7 @@ public class Portaaviones extends Nave{
     private final static int MAX_VIDA=5;
 
     public Portaaviones() {
-        super(MAX_VIDA);
+        super(MAX_VIDA, true);
     }
 
     public static int getMAX_VIDA() {

@@ -32,7 +32,7 @@ public class BatallaNaval {
         this.tamaño = 5;
         this.portaaviones = 1;
         this.buques = 0;
-        this.submarinos = 0;
+        this.submarinos = 1;
         this.cruceros = 0;
         this.lanchas = 0;
     }

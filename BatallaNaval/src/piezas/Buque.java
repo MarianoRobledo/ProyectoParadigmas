@@ -12,7 +12,7 @@ public class Buque extends Nave{
     private final static int MAX_VIDA=4;
 
     public Buque() {
-        super(MAX_VIDA);
+        super(MAX_VIDA, true);
     }
 
     @Override

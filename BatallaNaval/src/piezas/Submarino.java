@@ -12,7 +12,7 @@ public class Submarino extends Nave{
     private final static int MAX_VIDA=3;
 
     public Submarino() {
-        super(MAX_VIDA);
+        super(MAX_VIDA, true);
     }
 
     @Override
