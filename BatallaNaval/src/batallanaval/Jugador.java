@@ -19,6 +19,7 @@ public class Jugador implements IMuestraTablero{
 
     private String nick;
     private Tablero tablero;
+    private int tiros;
     
     public Jugador(){
         
@@ -27,6 +28,7 @@ public class Jugador implements IMuestraTablero{
     public Jugador(String nick, Tablero tablero) {
         this.nick = nick;
         this.tablero = tablero;
+        this.tiros = 0;
     }
 
 
@@ -44,6 +46,14 @@ public class Jugador implements IMuestraTablero{
 
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
+    }
+
+    public void incrementarTiros() {
+        this.tiros++;
+    }
+
+    public int getTiros() {
+        return tiros;
     }
     
     
