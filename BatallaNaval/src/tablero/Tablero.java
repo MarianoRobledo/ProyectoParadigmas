@@ -187,7 +187,9 @@ public class Tablero implements IMuestraTablero{
         if (tableroEnemigo.getMapa()[i][j].getNave() != null) {
             tableroEnemigo.getMapa()[i][j].getNave().RecibirDaño(); //Ingreso a la referencia de la nave de esa casilla y utilizo RecibirDaño()
         }else{
+            System.out.println("");
             System.out.println("!Agua!");
+            System.out.println("");
         }
         return tableroEnemigo.getMapa()[i][j].getNave() != null;
     }

@@ -32,8 +32,8 @@ public class BatallaNaval {
   //      this.casillas = MIN_CANTIDAD_CASILLAS;
         this.turnos = 10;
         this.tamaño = 5;
-        this.portaaviones = 1;
-        this.buques = 0;
+        this.portaaviones = 0;
+        this.buques = 1;
         this.submarinos = 0;
         this.cruceros = 0;
         this.lanchas = 0;
@@ -53,7 +53,7 @@ public class BatallaNaval {
                         + "1: Tamaño del mapa\n"
                         + "2: Disposicion de barcos,\n"
                         + "3: Ver las naves actuales\n"
-                        + "4: Salir");
+                        + "4: Volver al Menu");
 
                 res = r.nextInt();
                 r.nextLine();//para que no haya problema con el buffer

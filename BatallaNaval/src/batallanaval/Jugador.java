@@ -98,10 +98,6 @@ public class Jugador implements IMuestraTablero{
 
     }
 
-    private void ponerNaves(Nave nave, int size) {
-
-    }
-
     private boolean esValido(String i, int j, String[] filas) {// valida si la casilla es en donde se coloca esta libr
         return (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isAgua() && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isBarcoAlLado() == false && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isIsla() == false);
     }
@@ -199,7 +195,7 @@ public class Jugador implements IMuestraTablero{
                 System.out.println("Dar un nùmero valido");
                 System.out.println("");
             } finally {
-                r.reset();
+                r.nextLine();
             }
         }
         return columna - 1;

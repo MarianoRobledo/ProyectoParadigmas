@@ -4,6 +4,8 @@
  */
 package piezas;
 
+import batallanaval.Jugador;
+
 /**
  *
  * @author Mariano
@@ -20,6 +22,8 @@ public class Crucero extends Nave{
         return "Crucero{" + '}';
     }
     
-    
+    public boolean usarPoder(Jugador jugador1, Jugador jugadorEnemigo){
+        return false; //valor por defecto
+    }
     
 }

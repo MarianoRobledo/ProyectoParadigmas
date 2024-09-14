@@ -4,6 +4,8 @@
  */
 package piezas;
 
+import batallanaval.Jugador;
+
 /**
  *
  * @author Mariano
@@ -29,9 +31,13 @@ public abstract class Nave {
     public void RecibirDaño(){
         this.vida-=1;
         if(this.vida>0){
+            System.out.println("");
             System.out.println("¡Averiado!");
+            System.out.println("");
         }else{
+            System.out.println("");
             System.out.println("¡Hundido!");
+            System.out.println("");
         }
     }
 
@@ -47,5 +53,5 @@ public abstract class Nave {
         this.poder = poder;
     }
     
-    
+    public abstract boolean usarPoder(Jugador jugador1, Jugador jugadorEnemigo);   
 }
