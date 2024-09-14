@@ -69,17 +69,14 @@ public class Tablero implements IMuestraTablero{
         }
 
     }
-//Ver como mostrar el mapa ya que cuando s ecargan las naves es importante ve si hay naves al lado o no
-//Hay que ver si tenemos dos metodos uno para poner naves y otro para el juego 
-//De momento creo otro metodo para probar
 
-    public void verTableroDePiezas() { //en ves de pasar el tamaño usar el getmapa.length
+    public void verTableroDePiezas() { 
         
         String[] filas;
         int tamanio = this.mapa.length;
         for (int k = 0; k <= tamanio; k++){
             if (k==0){
-                System.out.print("  ");
+                System.out.print("   ");
             }else{
                 if (k<=10){
                     System.out.print(" " + k + " ");
@@ -93,7 +90,7 @@ public class Tablero implements IMuestraTablero{
         filas=filas(this.mapa.length);
         
         for (int i = 0; i < tamanio; i++) {
-            System.out.print(filas[i] + " ");
+            System.out.print(" " + filas[i] + " ");
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isIsla()) { //Si isla es True
                     System.out.print("[I]");
@@ -109,12 +106,12 @@ public class Tablero implements IMuestraTablero{
         }
     }
 
-    public void verTableroDePiezasEnJuego() { //en ves de pasar el tamaño usar el getmapa.length
+    public void verTableroDePiezasEnJuego() { 
         String[] filas;
         int tamanio = this.mapa.length;
         for (int k = 0; k <= tamanio; k++){
             if (k==0){
-                System.out.print("  ");
+                System.out.print("   ");
             }else{
                 if (k<=10){
                     System.out.print(" " + k + " ");
@@ -126,7 +123,7 @@ public class Tablero implements IMuestraTablero{
         System.out.println("");
         filas=filas(this.mapa.length);
         for (int i = 0; i < tamanio; i++) {
-            System.out.print(filas[i] + " ");
+            System.out.print(" " + filas[i] + " ");
             for (int j = 0; j < tamanio; j++) { //Recorro mi tablero para que muestre las posiciones de los barcos e islas
                 if (this.mapa[i][j].isIsla()) { //Si isla es True
                     System.out.print("[I]");
@@ -147,7 +144,7 @@ public class Tablero implements IMuestraTablero{
         int tamanio = this.mapa.length;
         for (int k = 0; k <= tamanio; k++){
             if (k==0){
-                System.out.print("  ");
+                System.out.print("   ");
             }else{
                 if (k<=10){
                     System.out.print(" " + k + " ");
@@ -159,7 +156,7 @@ public class Tablero implements IMuestraTablero{
         System.out.println("");
         filas=filas(this.mapa.length);
         for (int i = 0; i < tamanio; i++) {
-            System.out.print(filas[i] + " ");
+            System.out.print(" " + filas[i] + " ");
             for (int j = 0; j < tamanio; j++) { //Recorro el tablero del enemigo para ver donde he dado tiros
                 if (tableroEnemigo.getMapa()[i][j].isHit()) { //Si hit es True
                     if (tableroEnemigo.getMapa()[i][j].isAgua()) { //Si agua es True
@@ -168,6 +165,14 @@ public class Tablero implements IMuestraTablero{
                         System.out.print("[O]");
                     } else { //Si hay una nave
                         System.out.print("[X]");
+                    }
+                }else if(tableroEnemigo.getMapa()[i][j].isSonar()){
+                    if (tableroEnemigo.getMapa()[i][j].isAgua()) { //Si agua es True
+                        System.out.print("[D]");
+                    } else if (tableroEnemigo.getMapa()[i][j].isIsla()) { //Si isla es True
+                        System.out.print("[I]");
+                    } else { //Si hay una nave
+                        System.out.print("[N]");
                     }
                 } else { //Si no se disparo en esa casilla
                     System.out.print("[ ]");
@@ -182,7 +187,9 @@ public class Tablero implements IMuestraTablero{
         if (tableroEnemigo.getMapa()[i][j].getNave() != null) {
             tableroEnemigo.getMapa()[i][j].getNave().RecibirDaño(); //Ingreso a la referencia de la nave de esa casilla y utilizo RecibirDaño()
         }else{
+            System.out.println("");
             System.out.println("!Agua!");
+            System.out.println("");
         }
         return tableroEnemigo.getMapa()[i][j].getNave() != null;
     }
@@ -348,19 +355,19 @@ public class Tablero implements IMuestraTablero{
 
         }
         if (portaaviones > 0) {
-            System.out.println("Tienes " + portaaviones + " portaaviones");
+            System.out.println("Tienes " + portaaviones + " portaaviones hundidos");
         }
         if (buque > 0) {
-            System.out.println("Tienes " + buque + " buques");
+            System.out.println("Tienes " + buque + " buques hundidos");
         }
         if (submarino > 0) {
-            System.out.println("Tienes " + submarino + " submarinos");
+            System.out.println("Tienes " + submarino + " submarinos hundidos");
         }
         if (crucero > 0) {
-            System.out.println("Tienes " + crucero + " cruceros");
+            System.out.println("Tienes " + crucero + " cruceros hundidos");
         }
         if (lancha > 0) {
-            System.out.println("Tienes " + lancha + " lanchas");
+            System.out.println("Tienes " + lancha + " lanchas hundidos");
         }
         if (portaaviones == 0 && buque == 0 && submarino == 0 && crucero == 0 && lancha == 0) {
             System.out.println("No tiene barcos hundidos");

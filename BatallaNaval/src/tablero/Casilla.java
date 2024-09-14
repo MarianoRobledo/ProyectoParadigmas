@@ -15,6 +15,7 @@ public class Casilla {
     private boolean isla;
     private boolean hit;
     private boolean barcoAlLado;
+    private boolean sonar;
     private Nave nave;
     
     public Casilla(){
@@ -22,6 +23,7 @@ public class Casilla {
         this.isla=false;
         this.hit=false;
         this.barcoAlLado=false;
+        this.sonar=false;
     }
 
     public void setNave(Nave nave) {
@@ -64,6 +66,14 @@ public class Casilla {
 
     public Nave getNave() {
         return nave;
+    }
+
+    public boolean isSonar() {
+        return sonar;
+    }
+
+    public void setSonar(boolean sonar) {
+        this.sonar = sonar;
     }
     
     

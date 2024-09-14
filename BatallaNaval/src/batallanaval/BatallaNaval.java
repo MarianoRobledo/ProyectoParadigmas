@@ -19,6 +19,7 @@ public class BatallaNaval {
 
     private Jugador jugador1;
     private Jugador jugador2;
+    private int turnos;
     private int casillas;
     private int tamaño;
     private int portaaviones;
@@ -29,9 +30,10 @@ public class BatallaNaval {
 
     public BatallaNaval() {
   //      this.casillas = MIN_CANTIDAD_CASILLAS;
+        this.turnos = 10;
         this.tamaño = 5;
-        this.portaaviones = 1;
-        this.buques = 0;
+        this.portaaviones = 0;
+        this.buques = 1;
         this.submarinos = 0;
         this.cruceros = 0;
         this.lanchas = 0;
@@ -51,7 +53,7 @@ public class BatallaNaval {
                         + "1: Tamaño del mapa\n"
                         + "2: Disposicion de barcos,\n"
                         + "3: Ver las naves actuales\n"
-                        + "4: Salir");
+                        + "4: Volver al Menu");
 
                 res = r.nextInt();
                 r.nextLine();//para que no haya problema con el buffer
@@ -95,7 +97,6 @@ public class BatallaNaval {
  
     private void settTamaño() {
         boolean flag = true;
-        
         String res;
         while (flag) {
             r.reset();
@@ -104,16 +105,19 @@ public class BatallaNaval {
                 res = r.nextLine();
                 switch (res.toLowerCase()) {
                     case "a":
+                        this.turnos = 10;
                         this.tamaño = 5;
                         settNaves();
                         flag = false;
                         break;
                     case "b":
+                        this.turnos = 15;
                         this.tamaño = 10;
                         settNaves();
                         flag = false;
                         break;
                     case "c":
+                        this.turnos = 20;
                         this.tamaño = 15;
                         settNaves();
                         flag = false;
@@ -326,6 +330,10 @@ public class BatallaNaval {
 
     public void setLanchas(int lanchas) {
         this.lanchas = lanchas;
+    }
+
+    public int getTurnos() {
+        return turnos;
     }
     
     

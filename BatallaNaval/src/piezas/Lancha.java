@@ -4,6 +4,8 @@
  */
 package piezas;
 
+import batallanaval.Jugador;
+
 /**
  *
  * @author Mariano
@@ -12,7 +14,7 @@ public class Lancha extends Nave{
     private final static int MAX_VIDA=1;
 
     public Lancha() {
-        super(MAX_VIDA);
+        super(MAX_VIDA, false);
     }
 
     @Override
@@ -20,6 +22,8 @@ public class Lancha extends Nave{
         return "Lancha{" + '}';
     }
     
-    
+    public boolean usarPoder(Jugador jugador1, Jugador jugadorEnemigo){
+        return false; //valor por defecto
+    }
     
 }
