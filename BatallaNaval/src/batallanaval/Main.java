@@ -163,7 +163,9 @@ public class Main {
                                         flag = false;
                                     }
                                 } else {
+                                    System.out.println("");
                                     System.out.println("No es posible atacar esa posicion porque ya ha sido atacada, elija otra");
+                                        System.out.println("");
                                 }
 
                             }
@@ -218,7 +220,9 @@ public class Main {
                                             juego = false;
                                         }
                                     } else if (!res.equals("1") && !res.equals("2")) {
+                                        System.out.println("");
                                         System.out.println("Ingrese un numero valido");
+                                        System.out.println("");
                                     }
                                 }
 
@@ -521,6 +525,7 @@ public class Main {
             }
 
         }
+        System.out.println("");
         if (portaaviones > 0) {
             System.out.println("Tienes " + portaaviones + " poderes de portaaviones disponibles (Opcion P)");
         }
@@ -547,7 +552,7 @@ public class Main {
                 if (submarino > 0) {
                     System.out.println(" S ");
                 }
-
+                System.out.println("");
             }
             if (res.equals("P")) {
                 if (portaaviones > 0) {
@@ -575,6 +580,7 @@ public class Main {
                     System.out.println("No tiene submarinos con poderes habilitados");
                 }
             }
+            System.out.println("");
         }
         return acertoAtaque;
     }
