@@ -8,60 +8,102 @@ import java.util.*;
 import piezas.Nave;
 import tablero.Tablero;
 
+
 /**
- *
- * @author Mariano
+ * La clase Jugador representa a un jugador en el juego de Batalla Naval.
+ * Cada jugador tiene un nombre de usuario (nick), un tablero donde se 
+ * colocan sus barcos, y lleva un registro del número de tiros realizados.
+ * Esta clase también implementa la interfaz IMuestraTablero, que permite 
+ * mostrar el tablero del jugador.
+ * 
+ * @author Mariano y Emiliano
  */
-public class Jugador implements IMuestraTablero{
+public class Jugador implements IMuestraTablero {
 
     Scanner r = new Scanner(System.in);
 
     private String nick;
     private Tablero tablero;
     private int tiros;
-    
-    public Jugador(){
-        
+
+    /**
+     * Constructor por defecto. Crea un jugador sin inicializar atributos.
+     */
+    public Jugador() {
+
     }
-    
+
+    /**
+     * Constructor que inicializa el apodo del jugador y su tablero.
+     *
+     * @param nick El apodo del jugador.
+     * @param tablero El tablero asociado al jugador.
+     */
     public Jugador(String nick, Tablero tablero) {
         this.nick = nick;
         this.tablero = tablero;
         this.tiros = 0;
     }
 
-
+    /**
+     * Obtiene el apodo del jugador.
+     *
+     * @return El apodo (nick) del jugador.
+     */
     public String getNick() {
         return nick;
     }
 
+    /**
+     * Establece el apodo del jugador.
+     *
+     * @param nick El nuevo apodo del jugador.
+     */
     public void setNick(String nick) {
         this.nick = nick;
     }
 
+    /**
+     * Obtiene el tablero asociado al jugador.
+     *
+     * @return El tablero del jugador.
+     */
     public Tablero getTablero() {
         return tablero;
     }
 
+    /**
+     * Establece el tablero del jugador.
+     *
+     * @param tablero El nuevo tablero a asignar al jugador.
+     */
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
     }
 
+    /**
+     * Incrementa en uno el número de tiros realizados por el jugador.
+     */
     public void incrementarTiros() {
         this.tiros++;
     }
 
+    /**
+     * Obtiene el número total de tiros realizados por el jugador.
+     *
+     * @return El número de tiros.
+     */
     public int getTiros() {
         return tiros;
     }
-    
-    
-    
-   
-    public void atacar() {
-        
-    }
 
+    /**
+     * Método que coloca las naves en el tablero. Se itera sobre las naves
+     * disponibles en el tablero y se solicitan las coordenadas de fila y
+     * columna donde la nave se debe colocar. El proceso de colocación de la
+     * nave continúa hasta que la nave se coloque exitosamente en una posición
+     * válida.
+     */
     public void colocarNave() {
         Iterator<Nave> it = tablero.getNaves().iterator();
 
@@ -86,7 +128,7 @@ public class Jugador implements IMuestraTablero{
                 columna = darColumna(tamanio);
 
                 if (movimiento(fila, columna, nave, filas)) {
-                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + (columna+1));
+                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + (columna + 1));
                     flag = false;
                     r.reset();
 
@@ -97,16 +139,35 @@ public class Jugador implements IMuestraTablero{
 
     }
 
+    /**
+     * Verifica si la posición es válida para colocar una nave.
+     *
+     * @param i la fila en la que se desea colocar la nave.
+     * @param j la columna en la que se desea colocar la nave.
+     * @param filas las filas del tablero.
+     * @return true si la posición es válida, false en caso contrario.
+     */
     private boolean esValido(String i, int j, String[] filas) {// valida si la casilla es en donde se coloca esta libr
         return (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isAgua() && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isBarcoAlLado() == false && this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isIsla() == false);
     }
 
+    /**
+     * Verifica si la trayectoria hacia la derecha es válida para colocar una
+     * nave de tamaño determinado.
+     *
+     * @param i la fila inicial.
+     * @param j la columna inicial.
+     * @param size el tamaño de la nave.
+     * @param tamanio el tamaño total del tablero.
+     * @param filas las filas del tablero.
+     * @return true si toda la trayectoria está libre, false en caso contrario.
+     */
     private boolean esValidoDerecha(String i, int j, int size, int tamanio, String[] filas) {//valida si todo el intervalo es apto
         boolean flag = true;
         if ((j + size - 1) > tamanio - 1) {// si esta fuera de rango no se puede colocar esa pieza
             flag = false;
         } else {//comprueba si toda la trayectoria esta libre
-            for (int k = 0; k < size ; k++) {
+            for (int k = 0; k < size; k++) {
                 if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j + k].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j + k].isIsla() == true) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j + k].isBarcoAlLado() == true)) {
                     flag = false;
                 }
@@ -115,12 +176,23 @@ public class Jugador implements IMuestraTablero{
         return flag;
     }
 
+    /**
+     * Verifica si la trayectoria hacia abajo es válida para colocar una nave de
+     * tamaño determinado.
+     *
+     * @param i la fila inicial.
+     * @param j la columna inicial.
+     * @param size el tamaño de la nave.
+     * @param tamanio el tamaño total del tablero.
+     * @param filas las filas del tablero.
+     * @return true si toda la trayectoria está libre, false en caso contrario.
+     */
     private boolean esValidoAbajo(String i, int j, int size, int tamanio, String[] filas) {//valida si todo el intervalo es apto
         boolean flag = true;
         if ((Arrays.asList(filas).indexOf(i.toUpperCase()) + size - 1) > tamanio - 1) {// si esta fuera de rango no se puede colocar esa pieza
             flag = false;
         } else {//comprueba si toda la trayectoria esta libre
-            for (int k = 0; k < size ; k++) {
+            for (int k = 0; k < size; k++) {
                 if ((this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase()) + k][j].isAgua() == false) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase()) + k][j].isIsla() == true) || (this.tablero.getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase()) + k][j].isBarcoAlLado() == true)) {
                     flag = false;
                 }
@@ -128,9 +200,15 @@ public class Jugador implements IMuestraTablero{
         }
         return flag;
     }
-  
-    //Modificacion del metodo, ahora es publico
-    public String[] filas(int size){//devuelve el array de filas 
+
+    /**
+     * Devuelve un array de cadenas que representan las filas de un tablero. Las
+     * filas varían en tamaño dependiendo del parámetro 'size'.
+     *
+     * @param size Tamaño del tablero
+     * @return Un array de Strings que representan las filas del tablero.
+     */
+    public String[] filas(int size) {//devuelve el array de filas 
         String[] fila;
         switch (size) {
             case 5: {
@@ -150,7 +228,16 @@ public class Jugador implements IMuestraTablero{
         return fila;
     }
 
-    //Modificacion del metodo, ahora es publico
+    /**
+     * Permite al usuario seleccionar una fila válida desde un conjunto de
+     * filas. Pide al usuario ingresar una letra de fila hasta que la entrada
+     * sea válida.
+     *
+     * @param filas Un array de Strings que representan las filas del tablero.
+     * @param size Tamaño del tablero.
+     * @return Una cadena que representa la fila seleccionada por el usuario en
+     * mayúsculas.
+     */
     public String darFila(String[] filas, int size) {// devuelve el  valor de la fila1
         String res = "";
         r.reset();
@@ -176,7 +263,14 @@ public class Jugador implements IMuestraTablero{
         return res.toUpperCase();
     }
 
-    //Modificacion del metodo, ahora es publico
+    /**
+     * Permite al usuario seleccionar una columna válida. Pide al usuario
+     * ingresar un número de columna hasta que la entrada sea válida.
+     *
+     * @param size Tamaño del tablero (número máximo de columnas).
+     * @return Un número entero que representa la columna seleccionada por el
+     * usuario (índice base 0).
+     */
     public int darColumna(int size) {//devuelve el valor de la columna
         int columna = 0;
         boolean flag = true;
@@ -199,6 +293,19 @@ public class Jugador implements IMuestraTablero{
         return columna - 1;
     }
 
+    /**
+     * Coloca una nave en el tablero dependiendo de si el movimiento es válido.
+     * El usuario puede elegir colocar la nave horizontalmente (derecha) o
+     * verticalmente (abajo), o cambiar de fila y columna si la posición es
+     * inválida.
+     *
+     * @param fila La fila en la que se desea colocar la nave.
+     * @param columna La columna en la que se desea colocar la nave.
+     * @param nave La nave que se desea colocar.
+     * @param filas Un array de Strings que representan las filas del tablero.
+     * @return true si el movimiento es válido y la nave se ha colocado, false
+     * de lo contrario.
+     */
     private boolean movimiento(String fila, int columna, Nave nave, String[] filas) {//logica para colocar naves 
         boolean flag = true;
         boolean respuesta = false;
@@ -300,6 +407,16 @@ public class Jugador implements IMuestraTablero{
         return respuesta;
     }
 
+    /**
+     * Coloca una nave en el tablero de forma horizontal (hacia la derecha).
+     * También marca las posiciones adyacentes a la nave como ocupadas para
+     * evitar colisiones.
+     *
+     * @param fila La fila en la que se desea colocar la nave.
+     * @param columna La columna inicial desde donde se colocará la nave.
+     * @param nave La nave que se desea colocar.
+     * @param filas Un array de Strings que representan las filas del tablero.
+     */
     private void movimientoDerecha(String fila, int columna, Nave nave, String[] filas) {
         for (int i = 0; i < nave.getVida(); i++) {
             tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase())][columna + i].setNave(nave);
@@ -377,6 +494,16 @@ public class Jugador implements IMuestraTablero{
 
     }
 
+    /**
+     * Coloca una nave en el tablero de forma vertical (hacia abajo). También
+     * marca las posiciones adyacentes a la nave como ocupadas para evitar
+     * colisiones.
+     *
+     * @param fila La fila inicial desde donde se colocará la nave.
+     * @param columna La columna en la que se desea colocar la nave.
+     * @param nave La nave que se desea colocar.
+     * @param filas Un array de Strings que representan las filas del tablero.
+     */
     private void movimientoAbajo(String fila, int columna, Nave nave, String[] filas) {
         for (int i = 0; i < nave.getVida(); i++) {
             tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i][columna].setNave(nave);
@@ -439,13 +566,13 @@ public class Jugador implements IMuestraTablero{
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i][columna + 1].setBarcoAlLado(true);//elemento a la der de la pos inicial
                 }
 
-                if (columna >= 1 && (((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
+                if (columna >= 1 && (((int) Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna - 1].setBarcoAlLado(true);//elemento en diagonal inferior izq de la pos inicial
                 }
-                if (columna < filas.length - 1 && (((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
+                if (columna < filas.length - 1 && (((int) Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna + 1].setBarcoAlLado(true);//diagonal inferior der de la pos inicial
                 }
-                if ((((int)Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
+                if ((((int) Arrays.asList(filas).indexOf(fila.toUpperCase()) + i)) < filas.length - 1) {
                     tablero.getMapa()[Arrays.asList(filas).indexOf(fila.toUpperCase()) + i + 1][columna].setBarcoAlLado(true);//elemento abajo de la pos inicial
 
                 }

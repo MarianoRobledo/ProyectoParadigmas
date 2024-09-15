@@ -12,11 +12,28 @@ import piezas.Nave;
 import tablero.Tablero;
 
 /**
+ * La clase {@code Main} contiene el método principal que ejecuta el juego de
+ * Batalla Naval.
  *
- * @author maria
+ * Este programa permite a dos jugadores participar en una partida de Batalla
+ * Naval, donde cada jugador coloca sus barcos en un tablero y luego se turnan
+ * para atacar al adversario. El juego incluye opciones para iniciar una
+ * partida, configurar los parámetros del juego, obtener información sobre el
+ * juego y salir del programa.
  */
 public class Main {
 
+    /**
+     * El método principal que arranca el juego de Batalla Naval.
+     *
+     * Este método gestiona el menú principal del juego, permite a los jugadores
+     * configurar el juego, iniciar una partida y proporcionar información sobre
+     * el juego. Controla el flujo del juego, incluyendo la colocación de
+     * barcos, los turnos de ataque y la determinación del ganador.
+     *
+     * @param args Los argumentos de línea de comandos (no utilizados en este
+     * programa).
+     */
     public static void main(String[] args) {
         Scanner r = new Scanner(System.in);
         String res, opc;
@@ -107,10 +124,10 @@ public class Main {
                                             System.out.println("¡Has destruido todas las naves enemigas!");
                                             flag = false;
                                             juego = false;
-                                            if (turnos==b1.getTurnos()-1){
+                                            if (turnos == b1.getTurnos() - 1) {
                                                 tiroFinal = true;
                                             }
-                                            
+
                                         }
                                     } else if (!res.equals("1") && !res.equals("2")) {
                                         System.out.println("Ingrese un numero valido");
@@ -137,7 +154,7 @@ public class Main {
                                             System.out.println("¡Has destruido todas las naves enemigas!");
                                             flag = false;
                                             juego = false;
-                                            if (turnos==b1.getTurnos()-1){
+                                            if (turnos == b1.getTurnos() - 1) {
                                                 tiroFinal = true;
                                             }
                                         }
@@ -305,35 +322,35 @@ public class Main {
                         + "Al momento de atacar, en caso de haber un barco que tenga poder especial y no haya sido ocupado, el usuario podrá \n"
                         + "seleccionar entre usar ese poder o realizar un ataque normal, en caso de que se hayan ocupado todos los barcos con \n"
                         + "poderes se procederá a realizar un ataque normal. El ataque normal consta de un solo disparo en una posición \n"
-                        + "seleccionada. \n" 
-                        +"Si el jugador acertó el disparo, este va a poder volver a disparar, en caso contrario, el turno será para el oponente. \n"
+                        + "seleccionada. \n"
+                        + "Si el jugador acertó el disparo, este va a poder volver a disparar, en caso contrario, el turno será para el oponente. \n"
                         + "\n"
-                        + "El juego puede terminar de tres maneras: \n" 
-                        + "\n" 
-                        +"* El jugador, que hunda todos los barcos del oponente antes del último turno, gana \n" 
-                        +"\n" 
-                        +"* Si el jugador que inició, en su último tiro, hunde el último barco de su adversario, este va a tener la posibilidad \n"
-                        + "de un último turno para poder empatar. \n" 
-                        +"\n" 
-                        +"* Al acabarse los turnos, el jugador que más aciertos a barcos enemigos tenga, gana; en caso de que tengan la misma \n"
+                        + "El juego puede terminar de tres maneras: \n"
+                        + "\n"
+                        + "* El jugador, que hunda todos los barcos del oponente antes del último turno, gana \n"
+                        + "\n"
+                        + "* Si el jugador que inició, en su último tiro, hunde el último barco de su adversario, este va a tener la posibilidad \n"
+                        + "de un último turno para poder empatar. \n"
+                        + "\n"
+                        + "* Al acabarse los turnos, el jugador que más aciertos a barcos enemigos tenga, gana; en caso de que tengan la misma \n"
                         + "cantidad hay un empate entre los jugadores. ");
-                        System.out.println("");
-                        System.out.println("");
-                        System.out.println("LEYENDA DEL MAPA PROPIO DE NAVES:\n"
-                                + "[ ] representa Agua en el mapa\n"
-                                + "[I] representa parte de una Isla en el mapa\n"
-                                + "[N] representa una parte de una Nave Propia\n"
-                                + "[X] representa un tiro que cayó sobre una Nave Propia\n"
-                                + "[-] representa que hay un barco al lado de esta casilla\n");
-                        System.out.println("");
-                        System.out.println("LEYENDA DEL MAPA DE TIROS:\n"
-                                + "[ ] representa una zona desconocida del mapa enemigo\n"
-                                + "[I] representa parte de una Isla en el mapa\n"
-                                + "[N] representa una parte de una Nave Enemiga\n"
-                                + "[O] representa un tiro que cayó en Agua o Isla\n"
-                                + "[X] representa un tiro que cayó sobre una Nave Enemiga\n");
-                        System.out.println("");
-                        System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("LEYENDA DEL MAPA PROPIO DE NAVES:\n"
+                        + "[ ] representa Agua en el mapa\n"
+                        + "[I] representa parte de una Isla en el mapa\n"
+                        + "[N] representa una parte de una Nave Propia\n"
+                        + "[X] representa un tiro que cayó sobre una Nave Propia\n"
+                        + "[-] representa que hay un barco al lado de esta casilla\n");
+                System.out.println("");
+                System.out.println("LEYENDA DEL MAPA DE TIROS:\n"
+                        + "[ ] representa una zona desconocida del mapa enemigo\n"
+                        + "[I] representa parte de una Isla en el mapa\n"
+                        + "[N] representa una parte de una Nave Enemiga\n"
+                        + "[O] representa un tiro que cayó en Agua o Isla\n"
+                        + "[X] representa un tiro que cayó sobre una Nave Enemiga\n");
+                System.out.println("");
+                System.out.println("");
                 System.out.println("");
             } else if (!opc.equals("4")) {
                 System.out.println("");
@@ -344,6 +361,17 @@ public class Main {
 
     }
 
+    /**
+     * Muestra un menú interactivo para que el jugador elija una acción durante
+     * su turno.
+     *
+     * El jugador puede elegir entre atacar, ver los mapas, ver barcos a salvo o
+     * ver barcos hundidos. Este método gestiona la entrada del usuario,
+     * asegurando que se ingrese un número válido para cada opción.
+     *
+     * @return Un entero que representa la opción seleccionada por el jugador
+     * (1: Atacar, 2: Ver Mapas, 3: Ver Barcos a Salvo, 4: Ver Barcos Hundidos).
+     */
     //FUNCION MENU INTERACTIVO DE JUGADOR
     public static int verificadorDeNumero() {
         Scanner r = new Scanner(System.in);
@@ -373,11 +401,37 @@ public class Main {
         return res;
     }
 
+    /**
+     * Verifica si la posición elegida para atacar ha sido atacada
+     * anteriormente.
+     *
+     * Este método valida si la casilla especificada en el tablero del jugador
+     * ha sido atacada previamente.
+     *
+     * @param jugador El jugador cuyo tablero se está verificando.
+     * @param i La fila del tablero en la que se encuentra la casilla a
+     * verificar.
+     * @param j La columna del tablero en la que se encuentra la casilla a
+     * verificar.
+     * @param filas Un array de cadenas que representa las filas del tablero.
+     * @return {@code true} si la casilla no ha sido atacada anteriormente,
+     * {@code false} en caso contrario.
+     */
     //FUNCION QUE VERIFICA SI LA POSICION ELEGIDA PARA ATACAR FUE ATACADA ANTERIORMENTE
     private static boolean esAtaqueValido(Jugador jugador, String i, int j, String[] filas) {// valida si la casilla ha sido atacada
         return (jugador.getTablero().getMapa()[Arrays.asList(filas).indexOf(i.toUpperCase())][j].isHit() == false);
     }
 
+    /**
+     * Verifica si queda algún barco a salvo en el tablero del jugador.
+     *
+     * Este método comprueba si hay algún barco en el tablero del jugador que
+     * aún tenga vida, es decir, que no haya sido hundido.
+     *
+     * @param jugador El jugador cuyo tablero se está verificando.
+     * @return {@code true} si al menos un barco en el tablero tiene vida,
+     * {@code false} en caso contrario.
+     */
     //FUNCION QUE VERIFICA SI QUEDA ALGUN BARCO A SALVO DEL JUGADOR
     private static boolean quedanBarcosASalvo(Jugador jugador) {
         boolean hayBarcosASalvo = false;
@@ -397,6 +451,17 @@ public class Main {
         return hayBarcosASalvo;
     }
 
+    /**
+     * Verifica si existe algún poder disponible para usar en el tablero del
+     * jugador.
+     *
+     * Este método comprueba si hay algún barco en el tablero del jugador que
+     * tenga un poder especial habilitado.
+     *
+     * @param jugador El jugador cuyo tablero se está verificando.
+     * @return {@code true} si al menos un barco en el tablero tiene un poder
+     * especial habilitado, {@code false} en caso contrario.
+     */
     //FUNCION QUE VERIFICA SI EXISTE ALGUN PODER PARA USAR
     private static boolean poderDisponible(Jugador jugador) {
         boolean hayBarcosASalvo = false;
@@ -416,6 +481,19 @@ public class Main {
         return hayBarcosASalvo;
     }
 
+    /**
+     * Ejecuta los poderes disponibles del jugador y permite al jugador
+     * seleccionar cuál usar.
+     *
+     * Este método muestra las opciones de poderes disponibles para el jugador y
+     * ejecuta el poder seleccionado. El jugador puede elegir entre varios tipos
+     * de poderes dependiendo de las naves que tenga disponibles.
+     *
+     * @param jugador1 El jugador que está realizando el ataque.
+     * @param jugadorEnemigo El jugador al que se le va a atacar.
+     * @return {@code true} si el ataque con poder fue exitoso, {@code false} en
+     * caso contrario.
+     */
     //FUNCION QUE SE ENCARGA DE EJECUTAR LOS PODERES
     public static boolean mostrarPoderes(Jugador jugador1, Jugador jugadorEnemigo) {
         boolean acertoAtaque = false;
