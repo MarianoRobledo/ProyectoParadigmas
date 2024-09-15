@@ -6,7 +6,6 @@ package batallanaval;
 
 import java.util.*;
 import piezas.Nave;
-import piezas.Portaaviones;
 import tablero.Tablero;
 
 /**
@@ -191,7 +190,6 @@ public class Jugador implements IMuestraTablero{
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
                 System.out.println("Dar un nùmero valido");
                 System.out.println("");
             } finally {
