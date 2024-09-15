@@ -6,15 +6,17 @@ package piezas;
 
 import batallanaval.Jugador;
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
- *
- * @author Mariano
+ * Clase que representa un submarino el tablero.
+ * @author Mariano y Emiliano
  */
 public class Submarino extends Nave{
-    private final static int MAX_VIDA=3;
-
+    private final static int MAX_VIDA=3;//Establece la vida inicial del submarino
+    
+    /**
+     * Constructor por defecto que establece la vida máxima y el poder activo.
+     */
     public Submarino() {
         super(MAX_VIDA, true);
     }
@@ -24,7 +26,8 @@ public class Submarino extends Nave{
         return "Submarino{" + '}';
     }
     
-    public boolean usarPoder(Jugador jugador1, Jugador jugadorEnemigo){
+    @Override
+    public boolean usarPoder(Jugador j1, Jugador j2){
         String fila;
         String [] filas;
         int i;
@@ -34,33 +37,33 @@ public class Submarino extends Nave{
             System.out.println("");
             System.out.println("Dar las posicion a atacar");
             System.out.println("");    
-            filas=jugador1.filas(jugador1.getTablero().getMapa().length);
-            fila = jugadorEnemigo.darFila(filas, jugador1.getTablero().getMapa().length);
-            columna = jugadorEnemigo.darColumna(jugador1.getTablero().getMapa().length);
+            filas=j1.filas(j1.getTablero().getMapa().length);
+            fila = j2.darFila(filas, j1.getTablero().getMapa().length);
+            columna = j2.darColumna(j1.getTablero().getMapa().length);
             i=Arrays.asList(filas).indexOf(fila.toUpperCase());
-            if (i == jugador1.getTablero().getMapa().length - 1) {
-                if (columna == jugador1.getTablero().getMapa().length - 1) {
-                    jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i - 1][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i][columna - 1].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i - 1][columna - 1].setSonar(true);
+            if (i == j1.getTablero().getMapa().length - 1) {
+                if (columna == j1.getTablero().getMapa().length - 1) {
+                    j2.getTablero().getMapa()[i][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i - 1][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i][columna - 1].setSonar(true);
+                    j2.getTablero().getMapa()[i - 1][columna - 1].setSonar(true);
                 } else {
-                    jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i - 1][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i][columna + 1].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i - 1][columna + 1].setSonar(true);
+                    j2.getTablero().getMapa()[i][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i - 1][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i][columna + 1].setSonar(true);
+                    j2.getTablero().getMapa()[i - 1][columna + 1].setSonar(true);
                 }
             } else {
-                if (columna == jugador1.getTablero().getMapa().length - 1) {
-                    jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i + 1][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i][columna - 1].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i + 1][columna - 1].setSonar(true);
+                if (columna == j1.getTablero().getMapa().length - 1) {
+                    j2.getTablero().getMapa()[i][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i + 1][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i][columna - 1].setSonar(true);
+                    j2.getTablero().getMapa()[i + 1][columna - 1].setSonar(true);
                 } else {
-                    jugadorEnemigo.getTablero().getMapa()[i][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i + 1][columna].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i][columna + 1].setSonar(true);
-                    jugadorEnemigo.getTablero().getMapa()[i + 1][columna + 1].setSonar(true);
+                    j2.getTablero().getMapa()[i][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i + 1][columna].setSonar(true);
+                    j2.getTablero().getMapa()[i][columna + 1].setSonar(true);
+                    j2.getTablero().getMapa()[i + 1][columna + 1].setSonar(true);
                 }
             }
             this.poder=false;

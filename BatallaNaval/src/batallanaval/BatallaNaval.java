@@ -14,13 +14,10 @@ import java.util.Scanner;
 public class BatallaNaval {
 
     Scanner r = new Scanner(System.in);
-    private static final int MAX_CANTIDAD_CASILLAS = 20;
-    private static final int MIN_CANTIDAD_CASILLAS = 15;
 
     private Jugador jugador1;
     private Jugador jugador2;
     private int turnos;
-    private int casillas;
     private int tamaño;
     private int portaaviones;
     private int buques;
@@ -29,14 +26,13 @@ public class BatallaNaval {
     private int lanchas;
 
     public BatallaNaval() {
-  //      this.casillas = MIN_CANTIDAD_CASILLAS;
-        this.turnos = 10;
-        this.tamaño = 5;
-        this.portaaviones = 0;
+        this.turnos = 16;
+        this.tamaño = 10;
+        this.portaaviones = 1;
         this.buques = 1;
-        this.submarinos = 0;
-        this.cruceros = 0;
-        this.lanchas = 0;
+        this.submarinos = 1;
+        this.cruceros = 1;
+        this.lanchas = 1;
     }
 
     public boolean ataque(Jugador jugador, String fila, int columna, String[] filas) {
@@ -60,16 +56,22 @@ public class BatallaNaval {
 
                 switch (res) {
                     case 1:
+                        System.out.println("");
                         settTamaño();
                         r.reset();
+                        System.out.println("");
                         break;
                     case 2:
+                        System.out.println("");
                         settNaves();
                         r.reset();
+                        System.out.println("");
                         break;
                     case 3:
                         System.out.println("");
+                        System.out.println("");
                         System.out.println(mostrarParametros());
+                        System.out.println("");
                         System.out.println("");
                         r.reset();
                         break;
@@ -84,7 +86,7 @@ public class BatallaNaval {
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("");
                 System.out.println("Dar un numero valido");
                 System.out.println("");
                 r.nextLine();
@@ -101,6 +103,7 @@ public class BatallaNaval {
         while (flag) {
             r.reset();
             try {
+                System.out.println("");
                 System.out.println("Elegir entre la opcion A= 5x5, B= 10x10, C= 15x15 ");
                 res = r.nextLine();
                 switch (res.toLowerCase()) {
@@ -111,7 +114,7 @@ public class BatallaNaval {
                         flag = false;
                         break;
                     case "b":
-                        this.turnos = 15;
+                        this.turnos = 16;
                         this.tamaño = 10;
                         settNaves();
                         flag = false;
@@ -126,9 +129,11 @@ public class BatallaNaval {
                         System.out.println("Intentar con una letra correcta");
                         System.out.println("");
                         break;
+                        
                 }
+                System.out.println("");
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("");
                 System.out.println("Dar una letra valida");
                 System.out.println("");
             }
@@ -141,6 +146,7 @@ public class BatallaNaval {
         String res;
         while (flag) {
             try {
+                System.out.println("");
                 if (this.tamaño == 5) {
                     System.out.println("Elegir combinacion de barcos:\n"
                             + "A: 1 Portaavion, 1 Crucero;\n"
@@ -179,8 +185,8 @@ public class BatallaNaval {
                 } else if(this.tamaño==10){
                     System.out.println("Elegir combinacion de barcos:\n"
                             + "A: 1 Portaavion, 1 Buque, 1 Submarino, 1 Crucero, 1 Lancha;\n"
-                            + "B: 2 Portaaviones, 2 Submarinos, 2 Lanchas;\n"
-                            + "C: 2 Buques, 1 Submarino, 1 Crucero, 2 Lanchas");
+                            + "B: 2 Portaaviones, 1 Submarinos, 2 Lanchas;\n"
+                            + "C: 1 Buques, 1 Submarino, 1 Crucero, 2 Lanchas");
                     res = r.nextLine();
                     switch (res.toLowerCase()) {
                         case "a":
@@ -194,14 +200,14 @@ public class BatallaNaval {
                         case "b":
                             this.portaaviones = 2;
                             this.buques = 0;
-                            this.submarinos = 2;
+                            this.submarinos = 1;
                             this.cruceros = 0;
                             this.lanchas = 2;
                             flag=false;
                             break;
                         case "c":
                             this.portaaviones = 0;
-                            this.buques = 2;
+                            this.buques = 1;
                             this.submarinos = 1;
                             this.cruceros = 1;
                             this.lanchas = 2;
@@ -214,13 +220,13 @@ public class BatallaNaval {
                     
                 }else{
                     System.out.println("Elegir combinacion de barcos:\n"
-                            + "A: 2 Portaaviones, 1 Buque, 2 Submarinos, 1 Crucero, 2 Lanchas;\n"
+                            + "A: 1 Portaaviones, 1 Buque, 2 Submarinos, 1 Crucero, 2 Lanchas;\n"
                             + "B: 1 Portaavion, 2 Buques; 2 Submarinos, 2 Lanchas;\n"
-                            + "C: 2 Buques, 1 Submarino, 3 Cruceros, 2 Lanchas");
+                            + "C: 2 Buques, 1 Submarino, 2 Cruceros, 2 Lanchas");
                     res = r.nextLine();
                     switch (res.toLowerCase()) {
                         case "a":
-                            this.portaaviones = 2;
+                            this.portaaviones = 1;
                             this.buques = 1;
                             this.submarinos = 2;
                             this.cruceros = 1;
@@ -239,7 +245,7 @@ public class BatallaNaval {
                             this.portaaviones = 0;
                             this.buques = 2;
                             this.submarinos = 1;
-                            this.cruceros = 3;
+                            this.cruceros = 2;
                             this.lanchas = 2;
                             flag=false;
                             break;
@@ -247,9 +253,9 @@ public class BatallaNaval {
                             System.out.println("Dar una letra correcta");
                     }
                 }
-
+                System.out.println("");
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("");
                 System.out.println("Dar una letra valida");
                 System.out.println("");
             }
@@ -258,7 +264,7 @@ public class BatallaNaval {
     }
 
     public String mostrarParametros(){
-        return "Tamaño del mapa: "+this.tamaño+"\n"
+        return "Tamaño del mapa: "+this.tamaño+"x"+this.tamaño+"\n"
                 + "Cantidad de Portaaviones: "+this.portaaviones+"\n"
                 + "Cantidad de Buques: "+this.buques+"\n"
                 + "Cantidad de Submarinos: "+this.submarinos+"\n"

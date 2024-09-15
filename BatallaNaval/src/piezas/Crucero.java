@@ -7,12 +7,15 @@ package piezas;
 import batallanaval.Jugador;
 
 /**
- *
- * @author Mariano
+ * Clase que representa un buque el tablero.
+ * @author Mariano y Emiliano
  */
 public class Crucero extends Nave{
-    private final static int MAX_VIDA=2;
-
+    private final static int MAX_VIDA=2;//Establece la vida inicial del Crucero
+    
+    /**
+     * Constructor por defecto que establece la vida máxima y el poder desabilitado (No posee poder).
+     */
     public Crucero() {
         super(MAX_VIDA, false);
     }
@@ -22,7 +25,8 @@ public class Crucero extends Nave{
         return "Crucero{" + '}';
     }
     
-    public boolean usarPoder(Jugador jugador1, Jugador jugadorEnemigo){
+    @Override
+    public boolean usarPoder(Jugador j1, Jugador j2){
         return false; //valor por defecto
     }
     
