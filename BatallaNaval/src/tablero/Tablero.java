@@ -223,7 +223,7 @@ public class Tablero implements IMuestraTablero{
     public boolean marcarAtaque(int i, int j, Tablero tableroEnemigo) {
         tableroEnemigo.getMapa()[i][j].setHit(true); //Ingreso a la casilla elegida en el tablero enemigo y marco hit = true
         if (tableroEnemigo.getMapa()[i][j].getNave() != null) {
-            tableroEnemigo.getMapa()[i][j].getNave().RecibirDaño(); //Ingreso a la referencia de la nave de esa casilla y utilizo RecibirDaño()
+            tableroEnemigo.getMapa()[i][j].getNave().recibirDaño(); //Ingreso a la referencia de la nave de esa casilla y utilizo RecibirDaño()
             if (tableroEnemigo.getMapa()[i][j].getNave().isPoder() && tableroEnemigo.getMapa()[i][j].getNave().getVida()==0){
                 tableroEnemigo.getMapa()[i][j].getNave().setPoder(false);
             }

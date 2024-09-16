@@ -24,13 +24,6 @@ public abstract class Nave {
     public Nave() {
     }
     
-    /**
-     * Constructor de Nave con vida
-     * @param vida vida de la nave
-     */
-    public Nave(int vida) {
-        this.vida = vida;
-    }
     
     /**
      * Constructor de la nave con vida y podes
@@ -46,7 +39,7 @@ public abstract class Nave {
      * Reduce la vida de la nave en 1 y muestra un mensaje en caso que despues de recibir el daño
      * si esta averiado o si esta hundido
      */
-    public void RecibirDaño(){
+    public void recibirDaño(){
         this.vida-=1;
         if(this.vida>0){
             System.out.println("");
