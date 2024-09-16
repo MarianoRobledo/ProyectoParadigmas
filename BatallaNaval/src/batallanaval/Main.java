@@ -41,7 +41,7 @@ public class Main {
         opc = "";
         System.out.println("                    BATALLA NAVAL");
         while (!opc.equals("4")) {
-            System.out.println("");
+            
             System.out.println("BIENVENIDO AL MENU DE BATALLA NAVAL");
             System.out.println("1: Iniciar Juego");
             System.out.println("2: Configuracion");
@@ -60,31 +60,35 @@ public class Main {
 
                 Tablero t1 = new Tablero(b1.getTamaño(), b1.getPortaaviones(), b1.getBuques(), b1.getSubmarinos(), b1.getCruceros(), b1.getLanchas());
                 Tablero t2 = new Tablero(b1.getTamaño(), b1.getPortaaviones(), b1.getBuques(), b1.getSubmarinos(), b1.getCruceros(), b1.getLanchas());
-
+                System.out.println("");
+                System.out.println("");
                 System.out.println("Dar el nombre del primer jugador:");
                 res = r.nextLine();
                 Jugador j1 = new Jugador(res, t1);
                 r.reset();
-
+                System.out.println("");
+                System.out.println("");
                 System.out.println("Dar el nombre del segundo jugador:");
                 res = r.nextLine();
                 Jugador j2 = new Jugador(res, t2);
 
                 b1.setJugador1(j1);
                 b1.setJugador2(j2);
-
+                muchoEspacio();
                 System.out.println("");
                 System.out.println(j1.getNick() + " coloque las naves en el tablero");
                 System.out.println("");
                 System.out.println("----------------------------------------------------");
                 j1.colocarNave();
                 System.out.println("");
+                muchoEspacio();
                 System.out.println("----------------------------------------------------");
                 System.out.println("");
                 System.out.println(j2.getNick() + " coloque las naves en el tablero");
                 System.out.println("");
                 j2.colocarNave();
-
+                muchoEspacio();
+                
                 filas = b1.getJugador1().filas(b1.getTamaño());
 
                 System.out.println("");
@@ -133,7 +137,7 @@ public class Main {
                                         System.out.println("Ingrese un numero valido");
                                     }
                                 }
-
+                                
                             }
                             while (!ataqueDisponible) {
                                 System.out.println("");
@@ -181,6 +185,7 @@ public class Main {
 
                         }
                     }
+                    muchoEspacio();
                     if (juego == true || tiroFinal == true) { //Si el jugador 1 aun no destruyo todas las naves
                         flag = true;
                         System.out.println("");
@@ -266,6 +271,7 @@ public class Main {
 
                         }
                     }
+                    muchoEspacio();
                     if (turnos >= b1.getTurnos() && juego == true) {
 
                         System.out.println("----------------------------------------------------");
@@ -291,9 +297,12 @@ public class Main {
 
             } else if (opc.equals("2")) { //OPCION PARA PODER CONFIGURAR LOS PARAMETROS
                 System.out.println("");
+                System.out.println("");
                 b1.settearParametros();
                 System.out.println("");
+                System.out.println("");
             } else if (opc.equals("3")) { //INFORMACION QUE SE REQUIERA PARA ENTENDER EL JUEGO
+                System.out.println("");
                 System.out.println("");
                 System.out.println("El juego consta de dos jugadores en donde cada jugador tiene dos mapas, uno donde están las naves propias y \n"
                         + "donde se marcan los tiros que el enemigo realiza sobre las naves propias y el otro tablero donde se marcan los tiros propios, ya \n"
@@ -556,7 +565,8 @@ public class Main {
             }
             if (res.equals("P")) {
                 if (portaaviones > 0) {
-                    acertoAtaque = portaavionTemp.usarPoder(jugador1, jugadorEnemigo);
+                    //acertoAtaque = portaavionTemp.usarPoder(jugador1, jugadorEnemigo);
+                    acertoAtaque=  activarPoder(portaavionTemp, jugador1, jugadorEnemigo);
                     flag = false;
                 } else {
                     System.out.println("No tiene portaaviones con poderes habilitados");
@@ -565,7 +575,8 @@ public class Main {
             }
             if (res.equals("B")) {
                 if (buque > 0) {
-                    acertoAtaque = buqueTemp.usarPoder(jugador1, jugadorEnemigo);
+                    //acertoAtaque = buqueTemp.usarPoder(jugador1, jugadorEnemigo);
+                    acertoAtaque=  activarPoder(buqueTemp, jugador1, jugadorEnemigo);
                     flag = false;
                 } else {
                     System.out.println("No tiene buques con poderes habilitados");
@@ -574,7 +585,8 @@ public class Main {
             }
             if (res.equals("S")) {
                 if (submarino > 0) {
-                    acertoAtaque = submarinoTemp.usarPoder(jugador1, jugadorEnemigo);
+                    //acertoAtaque = submarinoTemp.usarPoder(jugador1, jugadorEnemigo);
+                    acertoAtaque=  activarPoder(submarinoTemp, jugador1, jugadorEnemigo);
                     flag = false;
                 } else {
                     System.out.println("No tiene submarinos con poderes habilitados");
@@ -583,5 +595,45 @@ public class Main {
             System.out.println("");
         }
         return acertoAtaque;
+    }
+    
+    /**
+     * Metodo polimorfico que activa el poder del objeto barco que llegue en la variable nave
+     * @param nave un objeto polimorfico de nave
+     * @param jugador1 jugador que utilizo el poder
+     * @param jugadorEnemigo jugador sobre el que se realiza el poder
+     * @return True si el poder impacto sobre una nave, False en caso contrario
+     */
+    public static boolean activarPoder(Nave nave, Jugador jugador1, Jugador jugadorEnemigo){
+        return nave.usarPoder(jugador1,jugadorEnemigo);
+    }
+    
+    /**
+     * Genera muchos saltos de linea
+     */
+    public static void muchoEspacio(){
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        
     }
 }

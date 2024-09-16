@@ -473,18 +473,6 @@ public class Tablero implements IMuestraTablero{
     public Casilla[][] getMapa() {
         return mapa;
     }
-
-    /**
-     * Establece si una casilla es una isla en la posición dada.
-     * 
-     * @param i La posicion de fila de la casilla.
-     * @param j La posicion de columna de la casilla.
-     * @param t True para establecer la casilla como isla, False para agua.
-     */
-    public void setCasillaIsla(int i, int j, boolean t) {
-        this.mapa[i][j].setAgua(false);
-        this.mapa[i][j].setIsla(t);
-    }
     
     /**
      * Devuelve el array de filas para el tablero.
