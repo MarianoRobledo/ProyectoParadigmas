@@ -59,6 +59,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i][columna].isHit()==false){
                             j2.getTablero().marcarAtaque(i, columna, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         
@@ -69,6 +70,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i+1][columna].isHit()==false){
                             j2.getTablero().marcarAtaque(i+1, columna, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         
@@ -82,6 +84,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i][columna].isHit()==false){
                             j2.getTablero().marcarAtaque(i, columna, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         
@@ -93,6 +96,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i][columna+1].isHit()==false){
                             j2.getTablero().marcarAtaque(i, columna+1, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         
@@ -114,6 +118,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i][columna].isHit()==false){
                             j2.getTablero().marcarAtaque(i, columna, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         
@@ -125,6 +130,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i][columna+1].isHit()==false){
                             j2.getTablero().marcarAtaque(i, columna+1, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         this.poder=false;
@@ -144,6 +150,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i][columna].isHit()==false){
                             j2.getTablero().marcarAtaque(i, columna, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         
@@ -154,6 +161,7 @@ public class Buque extends Nave{
                         }else if(j2.getTablero().getMapa()[i+1][columna].isHit()==false){
                             j2.getTablero().marcarAtaque(i+1, columna, j2.getTablero());
                         }else{
+                            System.out.println("");
                             System.out.println("Zona ya atacada");
                         }
                         

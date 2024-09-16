@@ -12,7 +12,7 @@ import piezas.Nave;
 import tablero.Tablero;
 
 /**
- * La clase {@code Main} contiene el método principal que ejecuta el juego de
+ * La clase Main contiene el método principal que ejecuta el juego de
  * Batalla Naval.
  *
  * Este programa permite a dos jugadores participar en una partida de Batalla
@@ -433,8 +433,8 @@ public class Main {
      * aún tenga vida, es decir, que no haya sido hundido.
      *
      * @param jugador El jugador cuyo tablero se está verificando.
-     * @return {@code true} si al menos un barco en el tablero tiene vida,
-     * {@code false} en caso contrario.
+     * @return true si al menos un barco en el tablero tiene vida,
+     *  false en caso contrario.
      */
     //FUNCION QUE VERIFICA SI QUEDA ALGUN BARCO A SALVO DEL JUGADOR
     private static boolean quedanBarcosASalvo(Jugador jugador) {
@@ -463,8 +463,8 @@ public class Main {
      * tenga un poder especial habilitado.
      *
      * @param jugador El jugador cuyo tablero se está verificando.
-     * @return {@code true} si al menos un barco en el tablero tiene un poder
-     * especial habilitado, {@code false} en caso contrario.
+     * @return true si al menos un barco en el tablero tiene un poder
+     * especial habilitado, false en caso contrario.
      */
     //FUNCION QUE VERIFICA SI EXISTE ALGUN PODER PARA USAR
     private static boolean poderDisponible(Jugador jugador) {
@@ -495,7 +495,7 @@ public class Main {
      *
      * @param jugador1 El jugador que está realizando el ataque.
      * @param jugadorEnemigo El jugador al que se le va a atacar.
-     * @return {@code true} si el ataque con poder fue exitoso, {@code false} en
+     * @return true si el ataque con poder fue exitoso,  false en
      * caso contrario.
      */
     //FUNCION QUE SE ENCARGA DE EJECUTAR LOS PODERES

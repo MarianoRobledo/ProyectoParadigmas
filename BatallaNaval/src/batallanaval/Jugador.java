@@ -239,6 +239,7 @@ public class Jugador implements IMuestraTablero {
      * mayúsculas.
      */
     public String darFila(String[] filas, int size) {// devuelve el  valor de la fila1
+        Scanner r = new Scanner(System.in);
         String res = "";
         r.reset();
         boolean flag = true;
@@ -294,7 +295,7 @@ public class Jugador implements IMuestraTablero {
     }
 
     /**
-     * Coloca una nave en el tablero dependiendo de si el movimiento es válido.
+     * Menú que da posibilidad de colocar las naves.
      * El usuario puede elegir colocar la nave horizontalmente (derecha) o
      * verticalmente (abajo), o cambiar de fila y columna si la posición es
      * inválida.
