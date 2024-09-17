@@ -8,14 +8,13 @@ import java.util.*;
 import piezas.Nave;
 import tablero.Tablero;
 
-
 /**
- * La clase Jugador representa a un jugador en el juego de Batalla Naval.
- * Cada jugador tiene un nombre de usuario (nick), un tablero donde se 
- * colocan sus barcos, y lleva un registro del número de tiros realizados.
- * Esta clase también implementa la interfaz IMuestraTablero, que permite 
- * mostrar el tablero del jugador.
- * 
+ * La clase Jugador representa a un jugador en el juego de Batalla Naval. Cada
+ * jugador tiene un nombre de usuario (nick), un tablero donde se colocan sus
+ * barcos, y lleva un registro del número de tiros realizados. Esta clase
+ * también implementa la interfaz IMuestraTablero, que permite mostrar el
+ * tablero del jugador.
+ *
  * @author Mariano y Emiliano
  */
 public class Jugador implements IMuestraTablero {
@@ -97,6 +96,14 @@ public class Jugador implements IMuestraTablero {
         return tiros;
     }
 
+    public void iterarNave() {
+        Iterator<Nave> it = tablero.getNaves().iterator();
+        while (it.hasNext()) {
+            colocarNave(it.next());
+        }
+
+    }
+
     /**
      * Método que coloca las naves en el tablero. Se itera sobre las naves
      * disponibles en el tablero y se solicitan las coordenadas de fila y
@@ -104,37 +111,27 @@ public class Jugador implements IMuestraTablero {
      * nave continúa hasta que la nave se coloque exitosamente en una posición
      * válida.
      */
-    public void colocarNave() {
-        Iterator<Nave> it = tablero.getNaves().iterator();
-
+    public void colocarNave(Nave nave) {
         int columna, tamanio;
-
         String fila;
         tamanio = tablero.getMapa().length;
-
         String[] filas = filas(tamanio);
+        boolean flag = true;
 
-        while (it.hasNext()) {
+        while (flag) {
+            tablero.verTableroDePiezas();
+            System.out.println("");
+            r.reset();
+            System.out.println("Se procede a colocar una pieza de tipo " + nave.getClass().getSimpleName()+ ", de "+ nave.getVida() +" casillas.");
+            System.out.println("");
+            fila = darFila(filas, tamanio);
+            columna = darColumna(tamanio);
 
-            boolean flag = true;
-            Nave nave = it.next();
-            while (flag) {
-                tablero.verTableroDePiezas();
-                System.out.println("");
+            if (movimiento(fila, columna, nave, filas)) {
+                System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + (columna + 1));
+                flag = false;
                 r.reset();
-                System.out.println("Se procede a colocar una pieza de tipo " + nave.getClass().getSimpleName());
-                fila = darFila(filas, tamanio);
-
-                columna = darColumna(tamanio);
-
-                if (movimiento(fila, columna, nave, filas)) {
-                    System.out.println("Se coloco con exito la pieza en la fila " + fila + " y columna " + (columna + 1));
-                    flag = false;
-                    r.reset();
-
-                }
             }
-
         }
 
     }
@@ -295,10 +292,9 @@ public class Jugador implements IMuestraTablero {
     }
 
     /**
-     * Menú que da posibilidad de colocar las naves.
-     * El usuario puede elegir colocar la nave horizontalmente (derecha) o
-     * verticalmente (abajo), o cambiar de fila y columna si la posición es
-     * inválida.
+     * Menú que da posibilidad de colocar las naves. El usuario puede elegir
+     * colocar la nave horizontalmente (derecha) o verticalmente (abajo), o
+     * cambiar de fila y columna si la posición es inválida.
      *
      * @param fila La fila en la que se desea colocar la nave.
      * @param columna La columna en la que se desea colocar la nave.
@@ -379,6 +375,7 @@ public class Jugador implements IMuestraTablero {
                             r.reset();
                         }
                     } else {
+                        System.out.println("");
                         System.out.println("No se puede colocar la pieza de ninguna forma.\n"
                                 + "Vuelva a cargar una posicion valida.\n"
                                 + "(Recuerde usar el mapa)");
@@ -387,6 +384,7 @@ public class Jugador implements IMuestraTablero {
                         respuesta = false;
                     }
                 } else {
+                    System.out.println("");
                     System.out.println("No se puede colocar la pieza de ninguna forma.\n"
                             + "Vuelva a cargar una posicion valida.\n"
                             + "(Recuerde usar el mapa)");
@@ -396,7 +394,7 @@ public class Jugador implements IMuestraTablero {
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("");
                 System.out.println("Error de seleccion");
                 System.out.println("");
                 r.nextLine();

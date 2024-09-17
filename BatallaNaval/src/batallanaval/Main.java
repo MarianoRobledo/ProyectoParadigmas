@@ -79,14 +79,14 @@ public class Main {
                 System.out.println(j1.getNick() + " coloque las naves en el tablero");
                 System.out.println("");
                 System.out.println("----------------------------------------------------");
-                j1.colocarNave();
+                j1.iterarNave();
                 System.out.println("");
                 muchoEspacio();
                 System.out.println("----------------------------------------------------");
                 System.out.println("");
                 System.out.println(j2.getNick() + " coloque las naves en el tablero");
                 System.out.println("");
-                j2.colocarNave();
+                j2.iterarNave();
                 muchoEspacio();
                 
                 filas = b1.getJugador1().filas(b1.getTamaño());

@@ -19,49 +19,49 @@ public class PruebaMain {
 
     public static void main(String[] args) {
 
-
-        BatallaNaval b1 = new BatallaNaval();
-
-        System.out.println("");
-        b1.settearParametros();
-
-        Tablero t1 = new Tablero(b1.getTamaño(), b1.getPortaaviones(), b1.getBuques(), b1.getSubmarinos(), b1.getCruceros(), b1.getLanchas());
-
-//        for (int i = 0; i < t1.getMapa().length; i++) {
-//            Casilla c1= t1.getMapa()[i][i];
-//            c1.setIsla(true);
-//            t1.setCasillaIsla(i, i, true);
-//        }
-//        
-//        System.out.println(t1.getMapa()[0][0].isIsla());
 //
+//        BatallaNaval b1 = new BatallaNaval();
+//
+//        System.out.println("");
+//        b1.settearParametros();
+//
+//        Tablero t1 = new Tablero(b1.getTamaño(), b1.getPortaaviones(), b1.getBuques(), b1.getSubmarinos(), b1.getCruceros(), b1.getLanchas());
+//
+////        for (int i = 0; i < t1.getMapa().length; i++) {
+////            Casilla c1= t1.getMapa()[i][i];
+////            c1.setIsla(true);
+////            t1.setCasillaIsla(i, i, true);
+////        }
+////        
+////        System.out.println(t1.getMapa()[0][0].isIsla());
+////
+////        t1.verTableroDePiezas();
+////        String[] fila = new String[]{"A", "B", "C", "D", "E"};
+//// 
+////        System.out.println("1 " + t1.getMapa()[Arrays.asList(fila).indexOf("A")][1].isAgua());
+////        System.out.println("2 " + t1.getMapa()[Arrays.asList(fila).indexOf("A")][1].isBarcoAlLado());
+//        Jugador j1 = new Jugador("mariano", t1);
+//        j1.colocarNave();
+//        System.out.println("");
 //        t1.verTableroDePiezas();
-//        String[] fila = new String[]{"A", "B", "C", "D", "E"};
-// 
-//        System.out.println("1 " + t1.getMapa()[Arrays.asList(fila).indexOf("A")][1].isAgua());
-//        System.out.println("2 " + t1.getMapa()[Arrays.asList(fila).indexOf("A")][1].isBarcoAlLado());
-        Jugador j1 = new Jugador("mariano", t1);
-        j1.colocarNave();
-        System.out.println("");
-        t1.verTableroDePiezas();
-        System.out.println("");
-        t1.verTableroDeTiros(t1);
-
-        System.out.println(t1.getMapa()[0][1].getNave() != null);
-      
-
-
-        
-        
-        Tablero t= new Tablero(15,1,2,0,1,0);
-        t.verTableroDePiezas();
-        System.out.println("");
-        t.insertarIslas();
-        System.out.println("");
-        t.verTableroDePiezas();
-        t.barcosASalvo();
-        t.barcosHundidos();
-        
+//        System.out.println("");
+//        t1.verTableroDeTiros(t1);
+//
+//        System.out.println(t1.getMapa()[0][1].getNave() != null);
+//      
+//
+//
+//        
+//        
+//        Tablero t= new Tablero(15,1,2,0,1,0);
+//        t.verTableroDePiezas();
+//        System.out.println("");
+//        t.insertarIslas();
+//        System.out.println("");
+//        t.verTableroDePiezas();
+//        t.barcosASalvo();
+//        t.barcosHundidos();
+//        
 
     }
 }
