@@ -96,6 +96,11 @@ public class Jugador implements IMuestraTablero {
         return tiros;
     }
 
+    /**
+     * Se itera sobre las naves disponibles del tablero
+     * y se llama a la funcion colocarNave(), que se encarga
+     * de colocar los barcos.
+     */
     public void iterarNave() {
         Iterator<Nave> it = tablero.getNaves().iterator();
         while (it.hasNext()) {
@@ -105,8 +110,7 @@ public class Jugador implements IMuestraTablero {
     }
 
     /**
-     * Método que coloca las naves en el tablero. Se itera sobre las naves
-     * disponibles en el tablero y se solicitan las coordenadas de fila y
+     * Método que coloca las naves en el tablero. Se solicitan las coordenadas de fila y
      * columna donde la nave se debe colocar. El proceso de colocación de la
      * nave continúa hasta que la nave se coloque exitosamente en una posición
      * válida.
@@ -250,7 +254,7 @@ public class Jugador implements IMuestraTablero {
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("");
                 System.out.println("Dar solo letras");
                 System.out.println("");
                 r.reset();
