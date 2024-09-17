@@ -21,10 +21,6 @@ public class Submarino extends Nave{
         super(MAX_VIDA, true);
     }
 
-    @Override
-    public String toString() {
-        return "Submarino{" + '}';
-    }
     
     @Override
     public boolean usarPoder(Jugador j1, Jugador j2){

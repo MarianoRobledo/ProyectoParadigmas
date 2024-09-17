@@ -20,10 +20,6 @@ public class Lancha extends Nave{
         super(MAX_VIDA, false);
     }
 
-    @Override
-    public String toString() {
-        return "Lancha{" + '}';
-    }
     
     @Override
     public boolean usarPoder(Jugador j1, Jugador j2){

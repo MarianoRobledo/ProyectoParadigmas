@@ -12,8 +12,8 @@ import piezas.Nave;
 import tablero.Tablero;
 
 /**
- * La clase Main contiene el método principal que ejecuta el juego de
- * Batalla Naval.
+ * La clase Main contiene el método principal que ejecuta el juego de Batalla
+ * Naval.
  *
  * Este programa permite a dos jugadores participar en una partida de Batalla
  * Naval, donde cada jugador coloca sus barcos en un tablero y luego se turnan
@@ -41,7 +41,7 @@ public class Main {
         opc = "";
         System.out.println("                    BATALLA NAVAL");
         while (!opc.equals("4")) {
-            
+
             System.out.println("BIENVENIDO AL MENU DE BATALLA NAVAL");
             System.out.println("1: Iniciar Juego");
             System.out.println("2: Configuracion");
@@ -88,7 +88,7 @@ public class Main {
                 System.out.println("");
                 j2.iterarNave();
                 muchoEspacio();
-                
+
                 filas = b1.getJugador1().filas(b1.getTamaño());
 
                 System.out.println("");
@@ -106,7 +106,7 @@ public class Main {
                     System.out.println("----------------------------------------------------");
                     System.out.println("Turno nº: " + ++turnos);
                     System.out.println("Turno del jugador: " + b1.getJugador1().getNick());
-                    //System.out.println("Cantidad de aciertos " + j1.getTiros());
+                    System.out.println("Cantidad de aciertos " + j1.getTiros());
                     System.out.println("----------------------------------------------------");
                     flag = true;
                     //TURNO DEL JUGADOR 1
@@ -137,7 +137,7 @@ public class Main {
                                         System.out.println("Ingrese un numero valido");
                                     }
                                 }
-                                
+
                             }
                             while (!ataqueDisponible) {
                                 System.out.println("");
@@ -169,7 +169,7 @@ public class Main {
                                 } else {
                                     System.out.println("");
                                     System.out.println("No es posible atacar esa posicion porque ya ha sido atacada, elija otra");
-                                        System.out.println("");
+                                    System.out.println("");
                                 }
 
                             }
@@ -195,7 +195,7 @@ public class Main {
                         System.out.println("----------------------------------------------------");
                         System.out.println("Turno nº: " + ++turnos);
                         System.out.println("Turno del jugador: " + b1.getJugador2().getNick());
-                        //System.out.println("Cantidad de aciertos " + j2.getTiros());
+                        System.out.println("Cantidad de aciertos " + j2.getTiros());
                         System.out.println("----------------------------------------------------");
                         if (tiroFinal == true) {
                             System.out.println("");
@@ -283,15 +283,21 @@ public class Main {
                 }
                 if (j1.getTiros() > j2.getTiros()) {
                     System.out.println("");
-                    System.out.println("Gano " + j1.getNick());
+                    System.out.println("----------------------------------------------------");
+                    System.out.println("                       Gano " + j1.getNick());
+                    System.out.println("----------------------------------------------------");
                     System.out.println("");
                 } else if (j2.getTiros() > j1.getTiros()) {
                     System.out.println("");
-                    System.out.println("Gano " + j2.getNick());
+                    System.out.println("----------------------------------------------------");
+                    System.out.println("                       Gano " + j2.getNick());
+                    System.out.println("----------------------------------------------------");
                     System.out.println("");
                 } else {
                     System.out.println("");
-                    System.out.println("Empate");
+                    System.out.println("----------------------------------------------------");
+                    System.out.println("                       Empate");
+                    System.out.println("----------------------------------------------------");
                     System.out.println("");
                 }
 
@@ -307,8 +313,8 @@ public class Main {
                 System.out.println("El juego consta de dos jugadores en donde cada jugador tiene dos mapas, uno donde están las naves propias y \n"
                         + "donde se marcan los tiros que el enemigo realiza sobre las naves propias y el otro tablero donde se marcan los tiros propios, ya \n"
                         + "sean al agua/isla o naves enemigas.\n"
-                        + "Las fichas que se pueden colocar en el tablero son barcos que tienen distintos atributos como vida o poderes. Los \n"
-                        + "poderes de cada barco van a poder ser ocupados solo 1 vez. Los distintos barcos son: \n"
+                        + "Las fichas que se pueden colocar en el tablero son barcos que tienen distintos atributos como vida o poderes. \n"
+                        + "Los poderes van a poder ser ocupado solo 1 vez en todo el juego. Los distintos barcos son:\n"
                         + "\n"
                         + "* Portaviones, que ocupa 5 casillas del mapa, tiene el poder de tirar tres tiros consecutivos de forma vertical o \n"
                         + "horizontal con respecto a una posición dada.  \n"
@@ -336,7 +342,10 @@ public class Main {
                         + "seleccionar entre usar ese poder o realizar un ataque normal, en caso de que se hayan ocupado todos los barcos con \n"
                         + "poderes se procederá a realizar un ataque normal. El ataque normal consta de un solo disparo en una posición \n"
                         + "seleccionada. \n"
-                        + "Si el jugador acertó el disparo, este va a poder volver a disparar, en caso contrario, el turno será para el oponente. \n"
+                        + " Si el jugador acertó el disparo o utilizo un poder y acertó el disparo (portaviones y buques), este va a poder volver a disparar,\n"
+                        + " en caso contrario, el turno será para el oponente. En caso de utilizar el poder de un submarino, contará como un turno finalizado,\n"
+                        + " se podrá observar el resultado del poder en el próximo turno propio viendo el mapa. En caso de no haber ocupado el poder de un barco\n"
+                        + " y este haya sido hundido, el poder del mismo se perderá. \n"
                         + "\n"
                         + "El juego puede terminar de tres maneras: \n"
                         + "\n"
@@ -442,8 +451,8 @@ public class Main {
      * aún tenga vida, es decir, que no haya sido hundido.
      *
      * @param jugador El jugador cuyo tablero se está verificando.
-     * @return true si al menos un barco en el tablero tiene vida,
-     *  false en caso contrario.
+     * @return true si al menos un barco en el tablero tiene vida, false en caso
+     * contrario.
      */
     //FUNCION QUE VERIFICA SI QUEDA ALGUN BARCO A SALVO DEL JUGADOR
     private static boolean quedanBarcosASalvo(Jugador jugador) {
@@ -472,8 +481,8 @@ public class Main {
      * tenga un poder especial habilitado.
      *
      * @param jugador El jugador cuyo tablero se está verificando.
-     * @return true si al menos un barco en el tablero tiene un poder
-     * especial habilitado, false en caso contrario.
+     * @return true si al menos un barco en el tablero tiene un poder especial
+     * habilitado, false en caso contrario.
      */
     //FUNCION QUE VERIFICA SI EXISTE ALGUN PODER PARA USAR
     private static boolean poderDisponible(Jugador jugador) {
@@ -504,8 +513,7 @@ public class Main {
      *
      * @param jugador1 El jugador que está realizando el ataque.
      * @param jugadorEnemigo El jugador al que se le va a atacar.
-     * @return true si el ataque con poder fue exitoso,  false en
-     * caso contrario.
+     * @return true si el ataque con poder fue exitoso, false en caso contrario.
      */
     //FUNCION QUE SE ENCARGA DE EJECUTAR LOS PODERES
     public static boolean mostrarPoderes(Jugador jugador1, Jugador jugadorEnemigo) {
@@ -566,7 +574,7 @@ public class Main {
             if (res.equals("P")) {
                 if (portaaviones > 0) {
                     //acertoAtaque = portaavionTemp.usarPoder(jugador1, jugadorEnemigo);
-                    acertoAtaque=  activarPoder(portaavionTemp, jugador1, jugadorEnemigo);
+                    acertoAtaque = activarPoder(portaavionTemp, jugador1, jugadorEnemigo);
                     flag = false;
                 } else {
                     System.out.println("No tiene portaaviones con poderes habilitados");
@@ -576,7 +584,7 @@ public class Main {
             if (res.equals("B")) {
                 if (buque > 0) {
                     //acertoAtaque = buqueTemp.usarPoder(jugador1, jugadorEnemigo);
-                    acertoAtaque=  activarPoder(buqueTemp, jugador1, jugadorEnemigo);
+                    acertoAtaque = activarPoder(buqueTemp, jugador1, jugadorEnemigo);
                     flag = false;
                 } else {
                     System.out.println("No tiene buques con poderes habilitados");
@@ -586,7 +594,7 @@ public class Main {
             if (res.equals("S")) {
                 if (submarino > 0) {
                     //acertoAtaque = submarinoTemp.usarPoder(jugador1, jugadorEnemigo);
-                    acertoAtaque=  activarPoder(submarinoTemp, jugador1, jugadorEnemigo);
+                    acertoAtaque = activarPoder(submarinoTemp, jugador1, jugadorEnemigo);
                     flag = false;
                 } else {
                     System.out.println("No tiene submarinos con poderes habilitados");
@@ -596,22 +604,24 @@ public class Main {
         }
         return acertoAtaque;
     }
-    
+
     /**
-     * Metodo polimorfico que activa el poder del objeto barco que llegue en la variable nave
+     * Metodo polimorfico que activa el poder del objeto barco que llegue en la
+     * variable nave
+     *
      * @param nave un objeto polimorfico de nave
      * @param jugador1 jugador que utilizo el poder
      * @param jugadorEnemigo jugador sobre el que se realiza el poder
      * @return True si el poder impacto sobre una nave, False en caso contrario
      */
-    public static boolean activarPoder(Nave nave, Jugador jugador1, Jugador jugadorEnemigo){
-        return nave.usarPoder(jugador1,jugadorEnemigo);
+    public static boolean activarPoder(Nave nave, Jugador jugador1, Jugador jugadorEnemigo) {
+        return nave.usarPoder(jugador1, jugadorEnemigo);
     }
-    
+
     /**
      * Genera muchos saltos de linea
      */
-    public static void muchoEspacio(){
+    public static void muchoEspacio() {
         System.out.println("");
         System.out.println("");
         System.out.println("");
@@ -634,6 +644,6 @@ public class Main {
         System.out.println("");
         System.out.println("");
         System.out.println("");
-        
+
     }
 }

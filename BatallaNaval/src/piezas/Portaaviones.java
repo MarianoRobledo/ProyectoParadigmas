@@ -22,19 +22,8 @@ public class Portaaviones extends Nave{
         super(MAX_VIDA, true);
     }
     
-    /**
-     * Devuelve la vida máxima del portaaviones.
-     * 
-     * @return La vida máxima del portaaviones.
-     */
-    public static int getMAX_VIDA() {
-        return MAX_VIDA;
-    }
+    
 
-    @Override
-    public String toString() {
-        return "Portaaviones{" + '}';
-    }
     
     @Override
     public boolean usarPoder(Jugador j1, Jugador j2){

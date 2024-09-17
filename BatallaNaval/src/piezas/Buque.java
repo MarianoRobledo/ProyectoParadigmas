@@ -22,10 +22,6 @@ public class Buque extends Nave{
         super(MAX_VIDA, true);
     }
 
-    @Override
-    public String toString() {
-        return "Buque{" + '}';
-    }
     
     @Override
     public boolean usarPoder(Jugador j1, Jugador j2){

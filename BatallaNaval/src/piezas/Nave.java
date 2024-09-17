@@ -18,12 +18,6 @@ public abstract class Nave {
     protected int vida;//vida de la nave
     protected boolean poder;//indica si la nave puede usar su poder especial
     
-    /**
-     * Constructor de Nave por defecto
-     */
-    public Nave() {
-    }
-    
     
     /**
      * Constructor de la nave con vida y podes

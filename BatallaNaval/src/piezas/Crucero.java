@@ -21,11 +21,6 @@ public class Crucero extends Nave{
     }
 
     @Override
-    public String toString() {
-        return "Crucero{" + '}';
-    }
-    
-    @Override
     public boolean usarPoder(Jugador j1, Jugador j2){
         return false; //valor por defecto
     }
