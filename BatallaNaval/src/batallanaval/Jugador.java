@@ -114,6 +114,7 @@ public class Jugador implements IMuestraTablero {
      * columna donde la nave se debe colocar. El proceso de colocación de la
      * nave continúa hasta que la nave se coloque exitosamente en una posición
      * válida.
+     * @param nave Podra se un objeto de la clase Portaaviones, Buque, Submarino, Crucero, Lancha.
      */
     public void colocarNave(Nave nave) {
         int columna, tamanio;
